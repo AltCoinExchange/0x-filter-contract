@@ -1,0 +1,718 @@
+{
+  "contractName": "MBalanceThresholdFilterCore",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "salt",
+          "type": "uint256"
+        },
+        {
+          "name": "signerAddress",
+          "type": "address"
+        },
+        {
+          "name": "signedExchangeTransaction",
+          "type": "bytes"
+        },
+        {
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "executeTransaction",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "addresses",
+          "type": "address[]"
+        }
+      ],
+      "name": "ValidatedAddresses",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\n\nimport \"../../../../interfaces/contracts/protocol/Exchange/IExchange.sol\";\nimport \"../interfaces/IThresholdAsset.sol\";\nimport \"../interfaces/IBalanceThresholdFilterCore.sol\";\n\n\ncontract MBalanceThresholdFilterCore is\n    IBalanceThresholdFilterCore\n{\n\n    // Points to 0x exchange contract\n    // solhint-disable var-name-mixedcase\n    IExchange internal EXCHANGE;\n\n    // The asset that must be held by makers/takers\n    IThresholdAsset internal THRESHOLD_ASSET;\n\n    // The minimum balance of `THRESHOLD_ASSET` that must be held by makers/takers\n    uint256 internal BALANCE_THRESHOLD;\n    // solhint-enable var-name-mixedcase\n\n    // Addresses that hold at least `BALANCE_THRESHOLD` of `THRESHOLD_ASSET`\n    event ValidatedAddresses (\n        address[] addresses\n    );\n\n    /// @dev Constructs an array of addresses to be validated.\n    ///      Addresses depend on which Exchange function is to be called\n    ///      (defined by `signedExchangeTransaction` above).\n    /// @param signerAddress Address of transaction signer.\n    /// @return addressesToValidate Array of addresses to validate.\n    function getAddressesToValidate(address signerAddress)\n        internal pure\n        returns (address[] memory addressesToValidate);\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/mixins/MBalanceThresholdFilterCore.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/mixins/MBalanceThresholdFilterCore.sol",
+    "exportedSymbols": {
+      "MBalanceThresholdFilterCore": [
+        672
+      ]
+    },
+    "id": 673,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 647,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:7"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/interfaces/contracts/protocol/Exchange/IExchange.sol",
+        "file": "../../../../interfaces/contracts/protocol/Exchange/IExchange.sol",
+        "id": 648,
+        "nodeType": "ImportDirective",
+        "scope": 673,
+        "sourceUnit": 3448,
+        "src": "606:74:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IThresholdAsset.sol",
+        "file": "../interfaces/IThresholdAsset.sol",
+        "id": 649,
+        "nodeType": "ImportDirective",
+        "scope": 673,
+        "sourceUnit": 646,
+        "src": "681:43:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IBalanceThresholdFilterCore.sol",
+        "file": "../interfaces/IBalanceThresholdFilterCore.sol",
+        "id": 650,
+        "nodeType": "ImportDirective",
+        "scope": 673,
+        "sourceUnit": 636,
+        "src": "725:55:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 651,
+              "name": "IBalanceThresholdFilterCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 635,
+              "src": "827:27:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IBalanceThresholdFilterCore_$635",
+                "typeString": "contract IBalanceThresholdFilterCore"
+              }
+            },
+            "id": 652,
+            "nodeType": "InheritanceSpecifier",
+            "src": "827:27:7"
+          }
+        ],
+        "contractDependencies": [
+          635
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 672,
+        "linearizedBaseContracts": [
+          672,
+          635
+        ],
+        "name": "MBalanceThresholdFilterCore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 654,
+            "name": "EXCHANGE",
+            "nodeType": "VariableDeclaration",
+            "scope": 672,
+            "src": "942:27:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IExchange_$3447",
+              "typeString": "contract IExchange"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 653,
+              "name": "IExchange",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3447,
+              "src": "942:9:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IExchange_$3447",
+                "typeString": "contract IExchange"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 656,
+            "name": "THRESHOLD_ASSET",
+            "nodeType": "VariableDeclaration",
+            "scope": 672,
+            "src": "1028:40:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IThresholdAsset_$645",
+              "typeString": "contract IThresholdAsset"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 655,
+              "name": "IThresholdAsset",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 645,
+              "src": "1028:15:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IThresholdAsset_$645",
+                "typeString": "contract IThresholdAsset"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 658,
+            "name": "BALANCE_THRESHOLD",
+            "nodeType": "VariableDeclaration",
+            "scope": 672,
+            "src": "1158:34:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 657,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "1158:7:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 663,
+            "name": "ValidatedAddresses",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 662,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 661,
+                  "indexed": false,
+                  "name": "addresses",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 663,
+                  "src": "1352:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 659,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1352:7:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 660,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1352:9:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1342:35:7"
+            },
+            "src": "1317:61:7"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Constructs an array of addresses to be validated.\n      Addresses depend on which Exchange function is to be called\n      (defined by `signedExchangeTransaction` above).\n @param signerAddress Address of transaction signer.\n @return addressesToValidate Array of addresses to validate.",
+            "id": 671,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getAddressesToValidate",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 666,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 665,
+                  "name": "signerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 671,
+                  "src": "1741:21:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 664,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1741:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1740:23:7"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 670,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 669,
+                  "name": "addressesToValidate",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 671,
+                  "src": "1803:36:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 667,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1803:7:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 668,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1803:9:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1802:38:7"
+            },
+            "scope": 672,
+            "src": "1709:132:7",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 673,
+        "src": "783:1060:7"
+      }
+    ],
+    "src": "580:1264:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/mixins/MBalanceThresholdFilterCore.sol",
+    "exportedSymbols": {
+      "MBalanceThresholdFilterCore": [
+        672
+      ]
+    },
+    "id": 673,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 647,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:7"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/interfaces/contracts/protocol/Exchange/IExchange.sol",
+        "file": "../../../../interfaces/contracts/protocol/Exchange/IExchange.sol",
+        "id": 648,
+        "nodeType": "ImportDirective",
+        "scope": 673,
+        "sourceUnit": 3448,
+        "src": "606:74:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IThresholdAsset.sol",
+        "file": "../interfaces/IThresholdAsset.sol",
+        "id": 649,
+        "nodeType": "ImportDirective",
+        "scope": 673,
+        "sourceUnit": 646,
+        "src": "681:43:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IBalanceThresholdFilterCore.sol",
+        "file": "../interfaces/IBalanceThresholdFilterCore.sol",
+        "id": 650,
+        "nodeType": "ImportDirective",
+        "scope": 673,
+        "sourceUnit": 636,
+        "src": "725:55:7",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 651,
+              "name": "IBalanceThresholdFilterCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 635,
+              "src": "827:27:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IBalanceThresholdFilterCore_$635",
+                "typeString": "contract IBalanceThresholdFilterCore"
+              }
+            },
+            "id": 652,
+            "nodeType": "InheritanceSpecifier",
+            "src": "827:27:7"
+          }
+        ],
+        "contractDependencies": [
+          635
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 672,
+        "linearizedBaseContracts": [
+          672,
+          635
+        ],
+        "name": "MBalanceThresholdFilterCore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 654,
+            "name": "EXCHANGE",
+            "nodeType": "VariableDeclaration",
+            "scope": 672,
+            "src": "942:27:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IExchange_$3447",
+              "typeString": "contract IExchange"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 653,
+              "name": "IExchange",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3447,
+              "src": "942:9:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IExchange_$3447",
+                "typeString": "contract IExchange"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 656,
+            "name": "THRESHOLD_ASSET",
+            "nodeType": "VariableDeclaration",
+            "scope": 672,
+            "src": "1028:40:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IThresholdAsset_$645",
+              "typeString": "contract IThresholdAsset"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 655,
+              "name": "IThresholdAsset",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 645,
+              "src": "1028:15:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IThresholdAsset_$645",
+                "typeString": "contract IThresholdAsset"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 658,
+            "name": "BALANCE_THRESHOLD",
+            "nodeType": "VariableDeclaration",
+            "scope": 672,
+            "src": "1158:34:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 657,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "1158:7:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 663,
+            "name": "ValidatedAddresses",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 662,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 661,
+                  "indexed": false,
+                  "name": "addresses",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 663,
+                  "src": "1352:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 659,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1352:7:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 660,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1352:9:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1342:35:7"
+            },
+            "src": "1317:61:7"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Constructs an array of addresses to be validated.\n      Addresses depend on which Exchange function is to be called\n      (defined by `signedExchangeTransaction` above).\n @param signerAddress Address of transaction signer.\n @return addressesToValidate Array of addresses to validate.",
+            "id": 671,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "getAddressesToValidate",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 666,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 665,
+                  "name": "signerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 671,
+                  "src": "1741:21:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 664,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1741:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1740:23:7"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 670,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 669,
+                  "name": "addressesToValidate",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 671,
+                  "src": "1803:36:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 667,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1803:7:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 668,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1803:9:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1802:38:7"
+            },
+            "scope": 672,
+            "src": "1709:132:7",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 673,
+        "src": "783:1060:7"
+      }
+    ],
+    "src": "580:1264:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:10.917Z",
+  "devdoc": {
+    "methods": {
+      "executeTransaction(uint256,address,bytes,bytes)": {
+        "details": "Executes an Exchange transaction iff the maker and taker meet       the hold at least `BALANCE_THRESHOLD` of the asset `THRESHOLD_ASSET` OR       the exchange function is a cancellation.      Supported Exchange functions:         - batchFillOrders         - batchFillOrdersNoThrow         - batchFillOrKillOrders         - fillOrder         - fillOrderNoThrow         - fillOrKillOrder         - marketBuyOrders         - marketBuyOrdersNoThrow         - marketSellOrders         - marketSellOrdersNoThrow         - matchOrders         - cancelOrder         - batchCancelOrders         - cancelOrdersUpTo     Trying to call any other exchange function will throw.",
+        "params": {
+          "salt": "Arbitrary number to ensure uniqueness of transaction hash.",
+          "signature": "Proof of signer transaction by signer.",
+          "signedExchangeTransaction": "AbiV2 encoded calldata.",
+          "signerAddress": "Address of transaction signer."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

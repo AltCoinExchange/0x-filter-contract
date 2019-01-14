@@ -1,0 +1,690 @@
+{
+  "contractName": "MAssets",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "assetData",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawAsset",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\n\nimport \"../interfaces/IAssets.sol\";\n\n\ncontract MAssets is\n    IAssets\n{\n    /// @dev Transfers given amount of asset to sender.\n    /// @param assetData Byte array encoded for the respective asset proxy.\n    /// @param amount Amount of asset to transfer to sender.\n    function transferAssetToSender(\n        bytes memory assetData,\n        uint256 amount\n    )\n        internal;\n\n    /// @dev Decodes ERC20 assetData and transfers given amount to sender.\n    /// @param assetData Byte array encoded for the respective asset proxy.\n    /// @param amount Amount of asset to transfer to sender.\n    function transferERC20Token(\n        bytes memory assetData,\n        uint256 amount\n    )\n        internal;\n\n    /// @dev Decodes ERC721 assetData and transfers given amount to sender.\n    /// @param assetData Byte array encoded for the respective asset proxy.\n    /// @param amount Amount of asset to transfer to sender.\n    function transferERC721Token(\n        bytes memory assetData,\n        uint256 amount\n    )\n        internal;\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/mixins/MAssets.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/mixins/MAssets.sol",
+    "exportedSymbols": {
+      "MAssets": [
+        2294
+      ]
+    },
+    "id": 2295,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2269,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:20"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IAssets.sol",
+        "file": "../interfaces/IAssets.sol",
+        "id": 2270,
+        "nodeType": "ImportDirective",
+        "scope": 2295,
+        "sourceUnit": 2064,
+        "src": "606:35:20",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2271,
+              "name": "IAssets",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2063,
+              "src": "668:7:20",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAssets_$2063",
+                "typeString": "contract IAssets"
+              }
+            },
+            "id": 2272,
+            "nodeType": "InheritanceSpecifier",
+            "src": "668:7:20"
+          }
+        ],
+        "contractDependencies": [
+          2063
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2294,
+        "linearizedBaseContracts": [
+          2294,
+          2063
+        ],
+        "name": "MAssets",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Transfers given amount of asset to sender.\n @param assetData Byte array encoded for the respective asset proxy.\n @param amount Amount of asset to transfer to sender.",
+            "id": 2279,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "transferAssetToSender",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2277,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2274,
+                  "name": "assetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2279,
+                  "src": "915:22:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2273,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "915:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2276,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2279,
+                  "src": "947:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2275,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "947:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "905:62:20"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2278,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "984:0:20"
+            },
+            "scope": 2294,
+            "src": "875:110:20",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Decodes ERC20 assetData and transfers given amount to sender.\n @param assetData Byte array encoded for the respective asset proxy.\n @param amount Amount of asset to transfer to sender.",
+            "id": 2286,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "transferERC20Token",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2284,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2281,
+                  "name": "assetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2286,
+                  "src": "1240:22:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2280,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1240:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2283,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2286,
+                  "src": "1272:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2282,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1272:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1230:62:20"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2285,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1309:0:20"
+            },
+            "scope": 2294,
+            "src": "1203:107:20",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Decodes ERC721 assetData and transfers given amount to sender.\n @param assetData Byte array encoded for the respective asset proxy.\n @param amount Amount of asset to transfer to sender.",
+            "id": 2293,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "transferERC721Token",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2291,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2288,
+                  "name": "assetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2293,
+                  "src": "1567:22:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2287,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1567:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2290,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2293,
+                  "src": "1599:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2289,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1599:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1557:62:20"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2292,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1636:0:20"
+            },
+            "scope": 2294,
+            "src": "1529:108:20",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2295,
+        "src": "644:995:20"
+      }
+    ],
+    "src": "580:1060:20"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/mixins/MAssets.sol",
+    "exportedSymbols": {
+      "MAssets": [
+        2294
+      ]
+    },
+    "id": 2295,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2269,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:20"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IAssets.sol",
+        "file": "../interfaces/IAssets.sol",
+        "id": 2270,
+        "nodeType": "ImportDirective",
+        "scope": 2295,
+        "sourceUnit": 2064,
+        "src": "606:35:20",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2271,
+              "name": "IAssets",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2063,
+              "src": "668:7:20",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAssets_$2063",
+                "typeString": "contract IAssets"
+              }
+            },
+            "id": 2272,
+            "nodeType": "InheritanceSpecifier",
+            "src": "668:7:20"
+          }
+        ],
+        "contractDependencies": [
+          2063
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2294,
+        "linearizedBaseContracts": [
+          2294,
+          2063
+        ],
+        "name": "MAssets",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Transfers given amount of asset to sender.\n @param assetData Byte array encoded for the respective asset proxy.\n @param amount Amount of asset to transfer to sender.",
+            "id": 2279,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "transferAssetToSender",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2277,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2274,
+                  "name": "assetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2279,
+                  "src": "915:22:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2273,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "915:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2276,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2279,
+                  "src": "947:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2275,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "947:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "905:62:20"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2278,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "984:0:20"
+            },
+            "scope": 2294,
+            "src": "875:110:20",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Decodes ERC20 assetData and transfers given amount to sender.\n @param assetData Byte array encoded for the respective asset proxy.\n @param amount Amount of asset to transfer to sender.",
+            "id": 2286,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "transferERC20Token",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2284,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2281,
+                  "name": "assetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2286,
+                  "src": "1240:22:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2280,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1240:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2283,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2286,
+                  "src": "1272:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2282,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1272:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1230:62:20"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2285,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1309:0:20"
+            },
+            "scope": 2294,
+            "src": "1203:107:20",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Decodes ERC721 assetData and transfers given amount to sender.\n @param assetData Byte array encoded for the respective asset proxy.\n @param amount Amount of asset to transfer to sender.",
+            "id": 2293,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "transferERC721Token",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2291,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2288,
+                  "name": "assetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2293,
+                  "src": "1567:22:20",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2287,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1567:5:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2290,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2293,
+                  "src": "1599:14:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2289,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1599:7:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1557:62:20"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2292,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1636:0:20"
+            },
+            "scope": 2294,
+            "src": "1529:108:20",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2295,
+        "src": "644:995:20"
+      }
+    ],
+    "src": "580:1060:20"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:48.686Z",
+  "devdoc": {
+    "methods": {
+      "withdrawAsset(bytes,uint256)": {
+        "details": "Withdraws assets from this contract. The contract requires a ZRX balance in order to       function optimally, and this function allows the ZRX to be withdrawn by owner. It may also be      used to withdraw assets that were accidentally sent to this contract.",
+        "params": {
+          "amount": "Amount of ERC20 token to withdraw.",
+          "assetData": "Byte array encoded for the respective asset proxy."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

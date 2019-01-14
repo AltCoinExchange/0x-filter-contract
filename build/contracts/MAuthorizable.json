@@ -1,0 +1,712 @@
+{
+  "contractName": "MAuthorizable",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "addAuthorizedAddress",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "removeAuthorizedAddress",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "removeAuthorizedAddressAtIndex",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAuthorizedAddresses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "AuthorizedAddressAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "AuthorizedAddressRemoved",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\n\nimport \"../../../../../interfaces/contracts/protocol/AssetProxy/IAuthorizable.sol\";\n\n\ncontract MAuthorizable is\n    IAuthorizable\n{\n    // Event logged when a new address is authorized.\n    event AuthorizedAddressAdded(\n        address indexed target,\n        address indexed caller\n    );\n\n    // Event logged when a currently authorized address is unauthorized.\n    event AuthorizedAddressRemoved(\n        address indexed target,\n        address indexed caller\n    );\n\n    /// @dev Only authorized addresses can invoke functions with this modifier.\n    modifier onlyAuthorized { revert(); _; }\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/protocol/contracts/protocol/AssetProxy/mixins/MAuthorizable.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/protocol/contracts/protocol/AssetProxy/mixins/MAuthorizable.sol",
+    "exportedSymbols": {
+      "MAuthorizable": [
+        6501
+      ]
+    },
+    "id": 6502,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6478,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:62"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/interfaces/contracts/protocol/AssetProxy/IAuthorizable.sol",
+        "file": "../../../../../interfaces/contracts/protocol/AssetProxy/IAuthorizable.sol",
+        "id": 6479,
+        "nodeType": "ImportDirective",
+        "scope": 6502,
+        "sourceUnit": 3411,
+        "src": "606:83:62",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6480,
+              "name": "IAuthorizable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3410,
+              "src": "722:13:62",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAuthorizable_$3410",
+                "typeString": "contract IAuthorizable"
+              }
+            },
+            "id": 6481,
+            "nodeType": "InheritanceSpecifier",
+            "src": "722:13:62"
+          }
+        ],
+        "contractDependencies": [
+          3410,
+          13475
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 6501,
+        "linearizedBaseContracts": [
+          6501,
+          3410,
+          13475
+        ],
+        "name": "MAuthorizable",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 6487,
+            "name": "AuthorizedAddressAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 6486,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6483,
+                  "indexed": true,
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6487,
+                  "src": "834:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6482,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "834:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6485,
+                  "indexed": true,
+                  "name": "caller",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6487,
+                  "src": "866:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6484,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "866:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "824:70:62"
+            },
+            "src": "796:99:62"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 6493,
+            "name": "AuthorizedAddressRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 6492,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6489,
+                  "indexed": true,
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "1014:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6488,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1014:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6491,
+                  "indexed": true,
+                  "name": "caller",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "1046:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6490,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1046:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1004:70:62"
+            },
+            "src": "974:101:62"
+          },
+          {
+            "body": {
+              "id": 6499,
+              "nodeType": "Block",
+              "src": "1185:16:62",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 6495,
+                      "name": "revert",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13736,
+                        13737
+                      ],
+                      "referencedDeclaration": 13736,
+                      "src": "1187:6:62",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_revert_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 6496,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1187:8:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 6497,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1187:8:62"
+                },
+                {
+                  "id": 6498,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1197:1:62"
+                }
+              ]
+            },
+            "documentation": "@dev Only authorized addresses can invoke functions with this modifier.",
+            "id": 6500,
+            "name": "onlyAuthorized",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 6494,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1185:0:62"
+            },
+            "src": "1161:40:62",
+            "visibility": "internal"
+          }
+        ],
+        "scope": 6502,
+        "src": "692:511:62"
+      }
+    ],
+    "src": "580:624:62"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/protocol/contracts/protocol/AssetProxy/mixins/MAuthorizable.sol",
+    "exportedSymbols": {
+      "MAuthorizable": [
+        6501
+      ]
+    },
+    "id": 6502,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6478,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:62"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/interfaces/contracts/protocol/AssetProxy/IAuthorizable.sol",
+        "file": "../../../../../interfaces/contracts/protocol/AssetProxy/IAuthorizable.sol",
+        "id": 6479,
+        "nodeType": "ImportDirective",
+        "scope": 6502,
+        "sourceUnit": 3411,
+        "src": "606:83:62",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6480,
+              "name": "IAuthorizable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3410,
+              "src": "722:13:62",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAuthorizable_$3410",
+                "typeString": "contract IAuthorizable"
+              }
+            },
+            "id": 6481,
+            "nodeType": "InheritanceSpecifier",
+            "src": "722:13:62"
+          }
+        ],
+        "contractDependencies": [
+          3410,
+          13475
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 6501,
+        "linearizedBaseContracts": [
+          6501,
+          3410,
+          13475
+        ],
+        "name": "MAuthorizable",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 6487,
+            "name": "AuthorizedAddressAdded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 6486,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6483,
+                  "indexed": true,
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6487,
+                  "src": "834:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6482,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "834:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6485,
+                  "indexed": true,
+                  "name": "caller",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6487,
+                  "src": "866:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6484,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "866:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "824:70:62"
+            },
+            "src": "796:99:62"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 6493,
+            "name": "AuthorizedAddressRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 6492,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6489,
+                  "indexed": true,
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "1014:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6488,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1014:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6491,
+                  "indexed": true,
+                  "name": "caller",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "1046:22:62",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6490,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1046:7:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1004:70:62"
+            },
+            "src": "974:101:62"
+          },
+          {
+            "body": {
+              "id": 6499,
+              "nodeType": "Block",
+              "src": "1185:16:62",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 6495,
+                      "name": "revert",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13736,
+                        13737
+                      ],
+                      "referencedDeclaration": 13736,
+                      "src": "1187:6:62",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_revert_pure$__$returns$__$",
+                        "typeString": "function () pure"
+                      }
+                    },
+                    "id": 6496,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1187:8:62",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 6497,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1187:8:62"
+                },
+                {
+                  "id": 6498,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1197:1:62"
+                }
+              ]
+            },
+            "documentation": "@dev Only authorized addresses can invoke functions with this modifier.",
+            "id": 6500,
+            "name": "onlyAuthorized",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 6494,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1185:0:62"
+            },
+            "src": "1161:40:62",
+            "visibility": "internal"
+          }
+        ],
+        "scope": 6502,
+        "src": "692:511:62"
+      }
+    ],
+    "src": "580:624:62"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:10.971Z",
+  "devdoc": {
+    "methods": {
+      "addAuthorizedAddress(address)": {
+        "details": "Authorizes an address.",
+        "params": {
+          "target": "Address to authorize."
+        }
+      },
+      "getAuthorizedAddresses()": {
+        "details": "Gets all authorized addresses.",
+        "return": "Array of authorized addresses."
+      },
+      "removeAuthorizedAddress(address)": {
+        "details": "Removes authorizion of an address.",
+        "params": {
+          "target": "Address to remove authorization from."
+        }
+      },
+      "removeAuthorizedAddressAtIndex(address,uint256)": {
+        "details": "Removes authorizion of an address.",
+        "params": {
+          "index": "Index of target in authorities array.",
+          "target": "Address to remove authorization from."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

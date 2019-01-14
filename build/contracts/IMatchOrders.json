@@ -1,0 +1,558 @@
+{
+  "contractName": "IMatchOrders",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "leftOrder",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "rightOrder",
+          "type": "tuple"
+        },
+        {
+          "name": "leftSignature",
+          "type": "bytes"
+        },
+        {
+          "name": "rightSignature",
+          "type": "bytes"
+        }
+      ],
+      "name": "matchOrders",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\npragma experimental ABIEncoderV2;\n\nimport \"../../../../libs/contracts/libs/LibOrder.sol\";\n\n\ncontract IMatchOrders {\n\n    /// @dev Match two complementary orders that have a profitable spread.\n    ///      Each order is filled at their respective price point. However, the calculations are\n    ///      carried out as though the orders are both being filled at the right order's price point.\n    ///      The profit made by the left order is then used to fill the right order as much as possible.\n    ///      This results in a spread being taken in terms of both assets. The spread is held within this contract.\n    /// @param leftOrder First order to match.\n    /// @param rightOrder Second order to match.\n    /// @param leftSignature Proof that order was created by the left maker.\n    /// @param rightSignature Proof that order was created by the right maker.\n    function matchOrders(\n        LibOrder.Order memory leftOrder,\n        LibOrder.Order memory rightOrder,\n        bytes memory leftSignature,\n        bytes memory rightSignature\n    )\n        public;\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IMatchOrders.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IMatchOrders.sol",
+    "exportedSymbols": {
+      "IMatchOrders": [
+        2771
+      ]
+    },
+    "id": 2772,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2757,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:27"
+      },
+      {
+        "id": 2758,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:27"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../../libs/contracts/libs/LibOrder.sol",
+        "id": 2759,
+        "nodeType": "ImportDirective",
+        "scope": 2772,
+        "sourceUnit": 4793,
+        "src": "640:54:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2771,
+        "linearizedBaseContracts": [
+          2771
+        ],
+        "name": "IMatchOrders",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Match two complementary orders that have a profitable spread.\n      Each order is filled at their respective price point. However, the calculations are\n      carried out as though the orders are both being filled at the right order's price point.\n      The profit made by the left order is then used to fill the right order as much as possible.\n      This results in a spread being taken in terms of both assets. The spread is held within this contract.\n @param leftOrder First order to match.\n @param rightOrder Second order to match.\n @param leftSignature Proof that order was created by the left maker.\n @param rightSignature Proof that order was created by the right maker.",
+            "id": 2770,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "matchOrders",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2768,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2761,
+                  "name": "leftOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1503:31:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2760,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1503:14:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2763,
+                  "name": "rightOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1544:32:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2762,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1544:14:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2765,
+                  "name": "leftSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1586:26:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2764,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1586:5:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2767,
+                  "name": "rightSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1622:27:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2766,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1622:5:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1493:162:27"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2769,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1670:0:27"
+            },
+            "scope": 2771,
+            "src": "1473:198:27",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2772,
+        "src": "697:976:27"
+      }
+    ],
+    "src": "580:1094:27"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IMatchOrders.sol",
+    "exportedSymbols": {
+      "IMatchOrders": [
+        2771
+      ]
+    },
+    "id": 2772,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2757,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:27"
+      },
+      {
+        "id": 2758,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:27"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../../libs/contracts/libs/LibOrder.sol",
+        "id": 2759,
+        "nodeType": "ImportDirective",
+        "scope": 2772,
+        "sourceUnit": 4793,
+        "src": "640:54:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2771,
+        "linearizedBaseContracts": [
+          2771
+        ],
+        "name": "IMatchOrders",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Match two complementary orders that have a profitable spread.\n      Each order is filled at their respective price point. However, the calculations are\n      carried out as though the orders are both being filled at the right order's price point.\n      The profit made by the left order is then used to fill the right order as much as possible.\n      This results in a spread being taken in terms of both assets. The spread is held within this contract.\n @param leftOrder First order to match.\n @param rightOrder Second order to match.\n @param leftSignature Proof that order was created by the left maker.\n @param rightSignature Proof that order was created by the right maker.",
+            "id": 2770,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "matchOrders",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2768,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2761,
+                  "name": "leftOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1503:31:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2760,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1503:14:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2763,
+                  "name": "rightOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1544:32:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2762,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1544:14:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2765,
+                  "name": "leftSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1586:26:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2764,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1586:5:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2767,
+                  "name": "rightSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2770,
+                  "src": "1622:27:27",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2766,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1622:5:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1493:162:27"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2769,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1670:0:27"
+            },
+            "scope": 2771,
+            "src": "1473:198:27",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2772,
+        "src": "697:976:27"
+      }
+    ],
+    "src": "580:1094:27"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:48.686Z",
+  "devdoc": {
+    "methods": {
+      "matchOrders((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),(address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes,bytes)": {
+        "details": "Match two complementary orders that have a profitable spread.      Each order is filled at their respective price point. However, the calculations are      carried out as though the orders are both being filled at the right order's price point.      The profit made by the left order is then used to fill the right order as much as possible.      This results in a spread being taken in terms of both assets. The spread is held within this contract.",
+        "params": {
+          "leftOrder": "First order to match.",
+          "leftSignature": "Proof that order was created by the left maker.",
+          "rightOrder": "Second order to match.",
+          "rightSignature": "Proof that order was created by the right maker."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

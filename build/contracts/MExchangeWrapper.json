@@ -1,0 +1,1399 @@
+{
+  "contractName": "MExchangeWrapper",
+  "abi": [],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\npragma experimental ABIEncoderV2;\n\nimport \"../../../../libs/contracts/libs/LibOrder.sol\";\nimport \"../../../../libs/contracts/libs/LibFillResults.sol\";\n\n\ncontract MExchangeWrapper {\n\n    /// @dev Fills the input order.\n    ///      Returns false if the transaction would otherwise revert.\n    /// @param order Order struct containing order specifications.\n    /// @param takerAssetFillAmount Desired amount of takerAsset to sell.\n    /// @param signature Proof that order has been created by maker.\n    /// @return Amounts filled and fees paid by maker and taker.\n    function fillOrderNoThrow(\n        LibOrder.Order memory order,\n        uint256 takerAssetFillAmount,\n        bytes memory signature\n    )\n        internal\n        returns (LibFillResults.FillResults memory fillResults);\n\n    /// @dev Synchronously executes multiple calls of fillOrder until total amount of WETH has been sold by taker.\n    ///      Returns false if the transaction would otherwise revert.\n    /// @param orders Array of order specifications.\n    /// @param wethSellAmount Desired amount of WETH to sell.\n    /// @param signatures Proofs that orders have been signed by makers.\n    /// @return Amounts filled and fees paid by makers and taker.\n    function marketSellWeth(\n        LibOrder.Order[] memory orders,\n        uint256 wethSellAmount,\n        bytes[] memory signatures\n    )\n        internal\n        returns (LibFillResults.FillResults memory totalFillResults);\n\n    /// @dev Synchronously executes multiple fill orders in a single transaction until total amount is bought by taker.\n    ///      Returns false if the transaction would otherwise revert.\n    ///      The asset being sold by taker must always be WETH.\n    /// @param orders Array of order specifications.\n    /// @param makerAssetFillAmount Desired amount of makerAsset to buy.\n    /// @param signatures Proofs that orders have been signed by makers.\n    /// @return Amounts filled and fees paid by makers and taker.\n    function marketBuyExactAmountWithWeth(\n        LibOrder.Order[] memory orders,\n        uint256 makerAssetFillAmount,\n        bytes[] memory signatures\n    )\n        internal\n        returns (LibFillResults.FillResults memory totalFillResults);\n\n    /// @dev Buys zrxBuyAmount of ZRX fee tokens, taking into account ZRX fees for each order. This will guarantee\n    ///      that at least zrxBuyAmount of ZRX is purchased (sometimes slightly over due to rounding issues).\n    ///      It is possible that a request to buy 200 ZRX will require purchasing 202 ZRX\n    ///      as 2 ZRX is required to purchase the 200 ZRX fee tokens. This guarantees at least 200 ZRX for future purchases.\n    ///      The asset being sold by taker must always be WETH. \n    /// @param orders Array of order specifications containing ZRX as makerAsset and WETH as takerAsset.\n    /// @param zrxBuyAmount Desired amount of ZRX to buy.\n    /// @param signatures Proofs that orders have been created by makers.\n    /// @return totalFillResults Amounts filled and fees paid by maker and taker.\n    function marketBuyExactZrxWithWeth(\n        LibOrder.Order[] memory orders,\n        uint256 zrxBuyAmount,\n        bytes[] memory signatures\n    )\n        internal\n        returns (LibFillResults.FillResults memory totalFillResults);\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/mixins/MExchangeWrapper.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/mixins/MExchangeWrapper.sol",
+    "exportedSymbols": {
+      "MExchangeWrapper": [
+        2350
+      ]
+    },
+    "id": 2351,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2296,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:21"
+      },
+      {
+        "id": 2297,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:21"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../../libs/contracts/libs/LibOrder.sol",
+        "id": 2298,
+        "nodeType": "ImportDirective",
+        "scope": 2351,
+        "sourceUnit": 4793,
+        "src": "640:54:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibFillResults.sol",
+        "file": "../../../../libs/contracts/libs/LibFillResults.sol",
+        "id": 2299,
+        "nodeType": "ImportDirective",
+        "scope": 2351,
+        "sourceUnit": 4404,
+        "src": "695:60:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2350,
+        "linearizedBaseContracts": [
+          2350
+        ],
+        "name": "MExchangeWrapper",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Fills the input order.\n      Returns false if the transaction would otherwise revert.\n @param order Order struct containing order specifications.\n @param takerAssetFillAmount Desired amount of takerAsset to sell.\n @param signature Proof that order has been created by maker.\n @return Amounts filled and fees paid by maker and taker.",
+            "id": 2310,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "fillOrderNoThrow",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2306,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2301,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1207:27:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2300,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1207:14:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2303,
+                  "name": "takerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1244:28:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2302,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1244:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2305,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1282:22:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2304,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1282:5:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1197:113:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2309,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2308,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1345:45:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2307,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "1345:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1344:47:21"
+            },
+            "scope": 2350,
+            "src": "1172:220:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Synchronously executes multiple calls of fillOrder until total amount of WETH has been sold by taker.\n      Returns false if the transaction would otherwise revert.\n @param orders Array of order specifications.\n @param wethSellAmount Desired amount of WETH to sell.\n @param signatures Proofs that orders have been signed by makers.\n @return Amounts filled and fees paid by makers and taker.",
+            "id": 2323,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "marketSellWeth",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2319,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2313,
+                  "name": "orders",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "1870:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Order_$4737_memory_$dyn_memory_ptr",
+                    "typeString": "struct LibOrder.Order[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 2311,
+                      "name": "LibOrder.Order",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 4737,
+                      "src": "1870:14:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                        "typeString": "struct LibOrder.Order"
+                      }
+                    },
+                    "id": 2312,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1870:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Order_$4737_storage_$dyn_storage_ptr",
+                      "typeString": "struct LibOrder.Order[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2315,
+                  "name": "wethSellAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "1910:22:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2314,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1910:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2318,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "1942:25:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2316,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1942:5:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2317,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1942:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1860:113:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2322,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2321,
+                  "name": "totalFillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "2008:50:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2320,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "2008:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2007:52:21"
+            },
+            "scope": 2350,
+            "src": "1837:223:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Synchronously executes multiple fill orders in a single transaction until total amount is bought by taker.\n      Returns false if the transaction would otherwise revert.\n      The asset being sold by taker must always be WETH.\n @param orders Array of order specifications.\n @param makerAssetFillAmount Desired amount of makerAsset to buy.\n @param signatures Proofs that orders have been signed by makers.\n @return Amounts filled and fees paid by makers and taker.",
+            "id": 2336,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "marketBuyExactAmountWithWeth",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2332,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2326,
+                  "name": "orders",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2632:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Order_$4737_memory_$dyn_memory_ptr",
+                    "typeString": "struct LibOrder.Order[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 2324,
+                      "name": "LibOrder.Order",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 4737,
+                      "src": "2632:14:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                        "typeString": "struct LibOrder.Order"
+                      }
+                    },
+                    "id": 2325,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2632:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Order_$4737_storage_$dyn_storage_ptr",
+                      "typeString": "struct LibOrder.Order[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2328,
+                  "name": "makerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2672:28:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2327,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2672:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2331,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2710:25:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2329,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2710:5:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2330,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2710:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2622:119:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2335,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2334,
+                  "name": "totalFillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2776:50:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2333,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "2776:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2775:52:21"
+            },
+            "scope": 2350,
+            "src": "2585:243:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Buys zrxBuyAmount of ZRX fee tokens, taking into account ZRX fees for each order. This will guarantee\n      that at least zrxBuyAmount of ZRX is purchased (sometimes slightly over due to rounding issues).\n      It is possible that a request to buy 200 ZRX will require purchasing 202 ZRX\n      as 2 ZRX is required to purchase the 200 ZRX fee tokens. This guarantees at least 200 ZRX for future purchases.\n      The asset being sold by taker must always be WETH. \n @param orders Array of order specifications containing ZRX as makerAsset and WETH as takerAsset.\n @param zrxBuyAmount Desired amount of ZRX to buy.\n @param signatures Proofs that orders have been created by makers.\n @return totalFillResults Amounts filled and fees paid by maker and taker.",
+            "id": 2349,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "marketBuyExactZrxWithWeth",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2345,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2339,
+                  "name": "orders",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3702:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Order_$4737_memory_$dyn_memory_ptr",
+                    "typeString": "struct LibOrder.Order[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 2337,
+                      "name": "LibOrder.Order",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 4737,
+                      "src": "3702:14:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                        "typeString": "struct LibOrder.Order"
+                      }
+                    },
+                    "id": 2338,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3702:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Order_$4737_storage_$dyn_storage_ptr",
+                      "typeString": "struct LibOrder.Order[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2341,
+                  "name": "zrxBuyAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3742:20:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2340,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3742:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2344,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3772:25:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2342,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3772:5:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2343,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3772:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3692:111:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2348,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2347,
+                  "name": "totalFillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3838:50:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2346,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "3838:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3837:52:21"
+            },
+            "scope": 2350,
+            "src": "3658:232:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2351,
+        "src": "758:3134:21"
+      }
+    ],
+    "src": "580:3313:21"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/mixins/MExchangeWrapper.sol",
+    "exportedSymbols": {
+      "MExchangeWrapper": [
+        2350
+      ]
+    },
+    "id": 2351,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2296,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:21"
+      },
+      {
+        "id": 2297,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:21"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../../libs/contracts/libs/LibOrder.sol",
+        "id": 2298,
+        "nodeType": "ImportDirective",
+        "scope": 2351,
+        "sourceUnit": 4793,
+        "src": "640:54:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibFillResults.sol",
+        "file": "../../../../libs/contracts/libs/LibFillResults.sol",
+        "id": 2299,
+        "nodeType": "ImportDirective",
+        "scope": 2351,
+        "sourceUnit": 4404,
+        "src": "695:60:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2350,
+        "linearizedBaseContracts": [
+          2350
+        ],
+        "name": "MExchangeWrapper",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Fills the input order.\n      Returns false if the transaction would otherwise revert.\n @param order Order struct containing order specifications.\n @param takerAssetFillAmount Desired amount of takerAsset to sell.\n @param signature Proof that order has been created by maker.\n @return Amounts filled and fees paid by maker and taker.",
+            "id": 2310,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "fillOrderNoThrow",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2306,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2301,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1207:27:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2300,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1207:14:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2303,
+                  "name": "takerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1244:28:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2302,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1244:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2305,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1282:22:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2304,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1282:5:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1197:113:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2309,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2308,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2310,
+                  "src": "1345:45:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2307,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "1345:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1344:47:21"
+            },
+            "scope": 2350,
+            "src": "1172:220:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Synchronously executes multiple calls of fillOrder until total amount of WETH has been sold by taker.\n      Returns false if the transaction would otherwise revert.\n @param orders Array of order specifications.\n @param wethSellAmount Desired amount of WETH to sell.\n @param signatures Proofs that orders have been signed by makers.\n @return Amounts filled and fees paid by makers and taker.",
+            "id": 2323,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "marketSellWeth",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2319,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2313,
+                  "name": "orders",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "1870:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Order_$4737_memory_$dyn_memory_ptr",
+                    "typeString": "struct LibOrder.Order[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 2311,
+                      "name": "LibOrder.Order",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 4737,
+                      "src": "1870:14:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                        "typeString": "struct LibOrder.Order"
+                      }
+                    },
+                    "id": 2312,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1870:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Order_$4737_storage_$dyn_storage_ptr",
+                      "typeString": "struct LibOrder.Order[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2315,
+                  "name": "wethSellAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "1910:22:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2314,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1910:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2318,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "1942:25:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2316,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1942:5:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2317,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1942:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1860:113:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2322,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2321,
+                  "name": "totalFillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2323,
+                  "src": "2008:50:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2320,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "2008:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2007:52:21"
+            },
+            "scope": 2350,
+            "src": "1837:223:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Synchronously executes multiple fill orders in a single transaction until total amount is bought by taker.\n      Returns false if the transaction would otherwise revert.\n      The asset being sold by taker must always be WETH.\n @param orders Array of order specifications.\n @param makerAssetFillAmount Desired amount of makerAsset to buy.\n @param signatures Proofs that orders have been signed by makers.\n @return Amounts filled and fees paid by makers and taker.",
+            "id": 2336,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "marketBuyExactAmountWithWeth",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2332,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2326,
+                  "name": "orders",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2632:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Order_$4737_memory_$dyn_memory_ptr",
+                    "typeString": "struct LibOrder.Order[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 2324,
+                      "name": "LibOrder.Order",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 4737,
+                      "src": "2632:14:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                        "typeString": "struct LibOrder.Order"
+                      }
+                    },
+                    "id": 2325,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2632:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Order_$4737_storage_$dyn_storage_ptr",
+                      "typeString": "struct LibOrder.Order[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2328,
+                  "name": "makerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2672:28:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2327,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2672:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2331,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2710:25:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2329,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2710:5:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2330,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2710:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2622:119:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2335,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2334,
+                  "name": "totalFillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2336,
+                  "src": "2776:50:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2333,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "2776:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2775:52:21"
+            },
+            "scope": 2350,
+            "src": "2585:243:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Buys zrxBuyAmount of ZRX fee tokens, taking into account ZRX fees for each order. This will guarantee\n      that at least zrxBuyAmount of ZRX is purchased (sometimes slightly over due to rounding issues).\n      It is possible that a request to buy 200 ZRX will require purchasing 202 ZRX\n      as 2 ZRX is required to purchase the 200 ZRX fee tokens. This guarantees at least 200 ZRX for future purchases.\n      The asset being sold by taker must always be WETH. \n @param orders Array of order specifications containing ZRX as makerAsset and WETH as takerAsset.\n @param zrxBuyAmount Desired amount of ZRX to buy.\n @param signatures Proofs that orders have been created by makers.\n @return totalFillResults Amounts filled and fees paid by maker and taker.",
+            "id": 2349,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "marketBuyExactZrxWithWeth",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2345,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2339,
+                  "name": "orders",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3702:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Order_$4737_memory_$dyn_memory_ptr",
+                    "typeString": "struct LibOrder.Order[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "contractScope": null,
+                      "id": 2337,
+                      "name": "LibOrder.Order",
+                      "nodeType": "UserDefinedTypeName",
+                      "referencedDeclaration": 4737,
+                      "src": "3702:14:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                        "typeString": "struct LibOrder.Order"
+                      }
+                    },
+                    "id": 2338,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3702:16:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Order_$4737_storage_$dyn_storage_ptr",
+                      "typeString": "struct LibOrder.Order[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2341,
+                  "name": "zrxBuyAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3742:20:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2340,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3742:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2344,
+                  "name": "signatures",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3772:25:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_memory_$dyn_memory_ptr",
+                    "typeString": "bytes[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 2342,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3772:5:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "id": 2343,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3772:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                      "typeString": "bytes[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3692:111:21"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2348,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2347,
+                  "name": "totalFillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2349,
+                  "src": "3838:50:21",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2346,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "3838:26:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3837:52:21"
+            },
+            "scope": 2350,
+            "src": "3658:232:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 2351,
+        "src": "758:3134:21"
+      }
+    ],
+    "src": "580:3313:21"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:10.929Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -1,0 +1,663 @@
+{
+  "contractName": "IForwarder",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "orders",
+          "type": "tuple[]"
+        },
+        {
+          "name": "makerAssetFillAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "signatures",
+          "type": "bytes[]"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "feeOrders",
+          "type": "tuple[]"
+        },
+        {
+          "name": "feeSignatures",
+          "type": "bytes[]"
+        },
+        {
+          "name": "feePercentage",
+          "type": "uint256"
+        },
+        {
+          "name": "feeRecipient",
+          "type": "address"
+        }
+      ],
+      "name": "marketBuyOrdersWithEth",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "makerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFeePaid",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFeePaid",
+              "type": "uint256"
+            }
+          ],
+          "name": "orderFillResults",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFeePaid",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFeePaid",
+              "type": "uint256"
+            }
+          ],
+          "name": "feeOrderFillResults",
+          "type": "tuple"
+        }
+      ],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "assetData",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawAsset",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "orders",
+          "type": "tuple[]"
+        },
+        {
+          "name": "signatures",
+          "type": "bytes[]"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "feeOrders",
+          "type": "tuple[]"
+        },
+        {
+          "name": "feeSignatures",
+          "type": "bytes[]"
+        },
+        {
+          "name": "feePercentage",
+          "type": "uint256"
+        },
+        {
+          "name": "feeRecipient",
+          "type": "address"
+        }
+      ],
+      "name": "marketSellOrdersWithEth",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "makerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFeePaid",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFeePaid",
+              "type": "uint256"
+            }
+          ],
+          "name": "orderFillResults",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFeePaid",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFeePaid",
+              "type": "uint256"
+            }
+          ],
+          "name": "feeOrderFillResults",
+          "type": "tuple"
+        }
+      ],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\npragma experimental ABIEncoderV2;\n\nimport \"./IForwarderCore.sol\";\nimport \"./IAssets.sol\";\n\n\n// solhint-disable no-empty-blocks\ncontract IForwarder is\n    IForwarderCore,\n    IAssets\n{}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IForwarder.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IForwarder.sol",
+    "exportedSymbols": {
+      "IForwarder": [
+        2073
+      ]
+    },
+    "id": 2074,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2065,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:16"
+      },
+      {
+        "id": 2066,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:16"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IForwarderCore.sol",
+        "file": "./IForwarderCore.sol",
+        "id": 2067,
+        "nodeType": "ImportDirective",
+        "scope": 2074,
+        "sourceUnit": 2128,
+        "src": "640:30:16",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IAssets.sol",
+        "file": "./IAssets.sol",
+        "id": 2068,
+        "nodeType": "ImportDirective",
+        "scope": 2074,
+        "sourceUnit": 2064,
+        "src": "671:23:16",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2069,
+              "name": "IForwarderCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2127,
+              "src": "759:14:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IForwarderCore_$2127",
+                "typeString": "contract IForwarderCore"
+              }
+            },
+            "id": 2070,
+            "nodeType": "InheritanceSpecifier",
+            "src": "759:14:16"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2071,
+              "name": "IAssets",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2063,
+              "src": "779:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAssets_$2063",
+                "typeString": "contract IAssets"
+              }
+            },
+            "id": 2072,
+            "nodeType": "InheritanceSpecifier",
+            "src": "779:7:16"
+          }
+        ],
+        "contractDependencies": [
+          2063,
+          2127
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2073,
+        "linearizedBaseContracts": [
+          2073,
+          2063,
+          2127
+        ],
+        "name": "IForwarder",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 2074,
+        "src": "732:57:16"
+      }
+    ],
+    "src": "580:210:16"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IForwarder.sol",
+    "exportedSymbols": {
+      "IForwarder": [
+        2073
+      ]
+    },
+    "id": 2074,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2065,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:16"
+      },
+      {
+        "id": 2066,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:16"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IForwarderCore.sol",
+        "file": "./IForwarderCore.sol",
+        "id": 2067,
+        "nodeType": "ImportDirective",
+        "scope": 2074,
+        "sourceUnit": 2128,
+        "src": "640:30:16",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/Forwarder/interfaces/IAssets.sol",
+        "file": "./IAssets.sol",
+        "id": 2068,
+        "nodeType": "ImportDirective",
+        "scope": 2074,
+        "sourceUnit": 2064,
+        "src": "671:23:16",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2069,
+              "name": "IForwarderCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2127,
+              "src": "759:14:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IForwarderCore_$2127",
+                "typeString": "contract IForwarderCore"
+              }
+            },
+            "id": 2070,
+            "nodeType": "InheritanceSpecifier",
+            "src": "759:14:16"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2071,
+              "name": "IAssets",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2063,
+              "src": "779:7:16",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAssets_$2063",
+                "typeString": "contract IAssets"
+              }
+            },
+            "id": 2072,
+            "nodeType": "InheritanceSpecifier",
+            "src": "779:7:16"
+          }
+        ],
+        "contractDependencies": [
+          2063,
+          2127
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2073,
+        "linearizedBaseContracts": [
+          2073,
+          2063,
+          2127
+        ],
+        "name": "IForwarder",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 2074,
+        "src": "732:57:16"
+      }
+    ],
+    "src": "580:210:16"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:48.685Z",
+  "devdoc": {
+    "methods": {
+      "marketBuyOrdersWithEth((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes)[],uint256,bytes[],(address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes)[],bytes[],uint256,address)": {
+        "details": "Attempt to purchase makerAssetFillAmount of makerAsset by selling ETH provided with transaction.      Any ZRX required to pay fees for primary orders will automatically be purchased by this contract.      Any ETH not spent will be refunded to sender.",
+        "params": {
+          "feeOrders": "Array of order specifications containing ZRX as makerAsset and WETH as takerAsset. Used to purchase ZRX for primary order fees.",
+          "feePercentage": "Percentage of WETH sold that will payed as fee to forwarding contract feeRecipient.",
+          "feeRecipient": "Address that will receive ETH when orders are filled.",
+          "feeSignatures": "Proofs that feeOrders have been created by makers.",
+          "makerAssetFillAmount": "Desired amount of makerAsset to purchase.",
+          "orders": "Array of order specifications used containing desired makerAsset and WETH as takerAsset. ",
+          "signatures": "Proofs that orders have been created by makers."
+        },
+        "return": "Amounts filled and fees paid by maker and taker for both sets of orders."
+      },
+      "marketSellOrdersWithEth((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes)[],bytes[],(address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes)[],bytes[],uint256,address)": {
+        "details": "Purchases as much of orders' makerAssets as possible by selling up to 95% of transaction's ETH value.      Any ZRX required to pay fees for primary orders will automatically be purchased by this contract.      5% of ETH value is reserved for paying fees to order feeRecipients (in ZRX) and forwarding contract feeRecipient (in ETH).      Any ETH not spent will be refunded to sender.",
+        "params": {
+          "feeOrders": "Array of order specifications containing ZRX as makerAsset and WETH as takerAsset. Used to purchase ZRX for primary order fees.",
+          "feePercentage": "Percentage of WETH sold that will payed as fee to forwarding contract feeRecipient.",
+          "feeRecipient": "Address that will receive ETH when orders are filled.",
+          "feeSignatures": "Proofs that feeOrders have been created by makers.",
+          "orders": "Array of order specifications used containing desired makerAsset and WETH as takerAsset. ",
+          "signatures": "Proofs that orders have been created by makers."
+        },
+        "return": "Amounts filled and fees paid by maker and taker for both sets of orders."
+      },
+      "withdrawAsset(bytes,uint256)": {
+        "details": "Withdraws assets from this contract. The contract requires a ZRX balance in order to       function optimally, and this function allows the ZRX to be withdrawn by owner. It may also be      used to withdraw assets that were accidentally sent to this contract.",
+        "params": {
+          "amount": "Amount of ERC20 token to withdraw.",
+          "assetData": "Byte array encoded for the respective asset proxy."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

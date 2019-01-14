@@ -1,0 +1,494 @@
+{
+  "contractName": "IOrderMatcher",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "leftOrder",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "rightOrder",
+          "type": "tuple"
+        },
+        {
+          "name": "leftSignature",
+          "type": "bytes"
+        },
+        {
+          "name": "rightSignature",
+          "type": "bytes"
+        }
+      ],
+      "name": "matchOrders",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "assetData",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawAsset",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "assetData",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approveAssetProxy",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\n\nimport \"../../../../utils/contracts/utils/Ownable/IOwnable.sol\";\nimport \"./IMatchOrders.sol\";\nimport \"./IAssets.sol\";\n\n\n// solhint-disable no-empty-blocks\ncontract IOrderMatcher is\n    IOwnable,\n    IMatchOrders,\n    IAssets\n{}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IOrderMatcher.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IOrderMatcher.sol",
+    "exportedSymbols": {
+      "IOrderMatcher": [
+        2783
+      ]
+    },
+    "id": 2784,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2773,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:28"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/utils/Ownable/IOwnable.sol",
+        "file": "../../../../utils/contracts/utils/Ownable/IOwnable.sol",
+        "id": 2774,
+        "nodeType": "ImportDirective",
+        "scope": 2784,
+        "sourceUnit": 13476,
+        "src": "606:64:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IMatchOrders.sol",
+        "file": "./IMatchOrders.sol",
+        "id": 2775,
+        "nodeType": "ImportDirective",
+        "scope": 2784,
+        "sourceUnit": 2772,
+        "src": "671:28:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IAssets.sol",
+        "file": "./IAssets.sol",
+        "id": 2776,
+        "nodeType": "ImportDirective",
+        "scope": 2784,
+        "sourceUnit": 2756,
+        "src": "700:23:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2777,
+              "name": "IOwnable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13475,
+              "src": "791:8:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IOwnable_$13475",
+                "typeString": "contract IOwnable"
+              }
+            },
+            "id": 2778,
+            "nodeType": "InheritanceSpecifier",
+            "src": "791:8:28"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2779,
+              "name": "IMatchOrders",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2771,
+              "src": "805:12:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IMatchOrders_$2771",
+                "typeString": "contract IMatchOrders"
+              }
+            },
+            "id": 2780,
+            "nodeType": "InheritanceSpecifier",
+            "src": "805:12:28"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2781,
+              "name": "IAssets",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2755,
+              "src": "823:7:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAssets_$2755",
+                "typeString": "contract IAssets"
+              }
+            },
+            "id": 2782,
+            "nodeType": "InheritanceSpecifier",
+            "src": "823:7:28"
+          }
+        ],
+        "contractDependencies": [
+          2755,
+          2771,
+          13475
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2783,
+        "linearizedBaseContracts": [
+          2783,
+          2755,
+          2771,
+          13475
+        ],
+        "name": "IOrderMatcher",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 2784,
+        "src": "761:72:28"
+      }
+    ],
+    "src": "580:254:28"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IOrderMatcher.sol",
+    "exportedSymbols": {
+      "IOrderMatcher": [
+        2783
+      ]
+    },
+    "id": 2784,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2773,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:28"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/utils/Ownable/IOwnable.sol",
+        "file": "../../../../utils/contracts/utils/Ownable/IOwnable.sol",
+        "id": 2774,
+        "nodeType": "ImportDirective",
+        "scope": 2784,
+        "sourceUnit": 13476,
+        "src": "606:64:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IMatchOrders.sol",
+        "file": "./IMatchOrders.sol",
+        "id": 2775,
+        "nodeType": "ImportDirective",
+        "scope": 2784,
+        "sourceUnit": 2772,
+        "src": "671:28:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/interfaces/IAssets.sol",
+        "file": "./IAssets.sol",
+        "id": 2776,
+        "nodeType": "ImportDirective",
+        "scope": 2784,
+        "sourceUnit": 2756,
+        "src": "700:23:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2777,
+              "name": "IOwnable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13475,
+              "src": "791:8:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IOwnable_$13475",
+                "typeString": "contract IOwnable"
+              }
+            },
+            "id": 2778,
+            "nodeType": "InheritanceSpecifier",
+            "src": "791:8:28"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2779,
+              "name": "IMatchOrders",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2771,
+              "src": "805:12:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IMatchOrders_$2771",
+                "typeString": "contract IMatchOrders"
+              }
+            },
+            "id": 2780,
+            "nodeType": "InheritanceSpecifier",
+            "src": "805:12:28"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2781,
+              "name": "IAssets",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2755,
+              "src": "823:7:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IAssets_$2755",
+                "typeString": "contract IAssets"
+              }
+            },
+            "id": 2782,
+            "nodeType": "InheritanceSpecifier",
+            "src": "823:7:28"
+          }
+        ],
+        "contractDependencies": [
+          2755,
+          2771,
+          13475
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2783,
+        "linearizedBaseContracts": [
+          2783,
+          2755,
+          2771,
+          13475
+        ],
+        "name": "IOrderMatcher",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 2784,
+        "src": "761:72:28"
+      }
+    ],
+    "src": "580:254:28"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:48.672Z",
+  "devdoc": {
+    "methods": {
+      "approveAssetProxy(bytes,uint256)": {
+        "details": "Approves or disapproves an AssetProxy to spend asset.",
+        "params": {
+          "amount": "Amount of asset to approve for respective proxy.",
+          "assetData": "Byte array encoded for the respective asset proxy."
+        }
+      },
+      "matchOrders((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),(address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes,bytes)": {
+        "details": "Match two complementary orders that have a profitable spread.      Each order is filled at their respective price point. However, the calculations are      carried out as though the orders are both being filled at the right order's price point.      The profit made by the left order is then used to fill the right order as much as possible.      This results in a spread being taken in terms of both assets. The spread is held within this contract.",
+        "params": {
+          "leftOrder": "First order to match.",
+          "leftSignature": "Proof that order was created by the left maker.",
+          "rightOrder": "Second order to match.",
+          "rightSignature": "Proof that order was created by the right maker."
+        }
+      },
+      "withdrawAsset(bytes,uint256)": {
+        "details": "Withdraws assets from this contract. The contract requires a ZRX balance in order to       function optimally, and this function allows the ZRX to be withdrawn by owner. It may also be      used to withdraw assets that were accidentally sent to this contract.",
+        "params": {
+          "amount": "Amount of asset to withdraw.",
+          "assetData": "Byte array encoded for the respective asset proxy."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

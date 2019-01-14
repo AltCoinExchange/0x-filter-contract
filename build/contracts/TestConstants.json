@@ -1,0 +1,1954 @@
+{
+  "contractName": "TestConstants",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "MAINNET_ZRX_ASSET_DATA",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "assertValidZrxAssetData",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610622806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634e7411e214610051578063a7e889e714610080575b600080fd5b34801561005d57600080fd5b50610066610110565b604051808215151515815260200191505060405180910390f35b34801561008c57600080fd5b506100956104b0565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100d55780820151818401526020810190506100ba565b50505050905090810190601f1680156101025780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b600060608060405180807f4552433230546f6b656e2861646472657373290000000000000000000000000081525060130190506040518091039020736ff6c0ff1d68b964901f986d4c9fa3ac68346570604051602401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050604051602081830303815290604052907bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166020820180517bffffffffffffffffffffffffffffffffffffffffffffffffffffffff8381831617835250505050915061026a606060405190810160405280602481526020017ff47261b00000000000000000000000006ff6c0ff1d68b964901f986d4c9fa3ac81526020017f68346570000000000000000000000000000000000000000000000000000000008152508361051090919063ffffffff16565b15156102de576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601c8152602001807f494e56414c49445f4b4f56414e5f5a52585f41535345545f444154410000000081525060200191505060405180910390fd5b60405180807f4552433230546f6b656e286164647265737329000000000000000000000000008152506013019050604051809103902073e41d2489571d322189246dafa5ebde1f4699f498604051602401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050604051602081830303815290604052907bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166020820180517bffffffffffffffffffffffffffffffffffffffffffffffffffffffff83818316178352505050509050610433606060405190810160405280602481526020017ff47261b0000000000000000000000000e41d2489571d322189246dafa5ebde1f81526020017f4699f498000000000000000000000000000000000000000000000000000000008152508261051090919063ffffffff16565b15156104a7576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601e8152602001807f494e56414c49445f4d41494e4e45545f5a52585f41535345545f44415441000081525060200191505060405180910390fd5b60019250505090565b606060405190810160405280602481526020017ff47261b0000000000000000000000000e41d2489571d322189246dafa5ebde1f81526020017f4699f4980000000000000000000000000000000000000000000000000000000081525081565b6000815183511480156105ee5750816040518082805190602001908083835b602083101515610554578051825260208201915060208101905060208303925061052f565b6001836020036101000a038019825116818451168082178552505050505050905001915050604051809103902060001916836040518082805190602001908083835b6020831015156105bb5780518252602082019150602081019050602083039250610596565b6001836020036101000a038019825116818451168082178552505050505050905001915050604051809103902060001916145b9050929150505600a165627a7a72305820c111a6f03769cb77af804863af0cfe0b60c20c948be9bfb9ac14a99fc1a216060029",
+  "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680634e7411e214610051578063a7e889e714610080575b600080fd5b34801561005d57600080fd5b50610066610110565b604051808215151515815260200191505060405180910390f35b34801561008c57600080fd5b506100956104b0565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100d55780820151818401526020810190506100ba565b50505050905090810190601f1680156101025780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b600060608060405180807f4552433230546f6b656e2861646472657373290000000000000000000000000081525060130190506040518091039020736ff6c0ff1d68b964901f986d4c9fa3ac68346570604051602401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050604051602081830303815290604052907bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166020820180517bffffffffffffffffffffffffffffffffffffffffffffffffffffffff8381831617835250505050915061026a606060405190810160405280602481526020017ff47261b00000000000000000000000006ff6c0ff1d68b964901f986d4c9fa3ac81526020017f68346570000000000000000000000000000000000000000000000000000000008152508361051090919063ffffffff16565b15156102de576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601c8152602001807f494e56414c49445f4b4f56414e5f5a52585f41535345545f444154410000000081525060200191505060405180910390fd5b60405180807f4552433230546f6b656e286164647265737329000000000000000000000000008152506013019050604051809103902073e41d2489571d322189246dafa5ebde1f4699f498604051602401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050604051602081830303815290604052907bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19166020820180517bffffffffffffffffffffffffffffffffffffffffffffffffffffffff83818316178352505050509050610433606060405190810160405280602481526020017ff47261b0000000000000000000000000e41d2489571d322189246dafa5ebde1f81526020017f4699f498000000000000000000000000000000000000000000000000000000008152508261051090919063ffffffff16565b15156104a7576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601e8152602001807f494e56414c49445f4d41494e4e45545f5a52585f41535345545f44415441000081525060200191505060405180910390fd5b60019250505090565b606060405190810160405280602481526020017ff47261b0000000000000000000000000e41d2489571d322189246dafa5ebde1f81526020017f4699f4980000000000000000000000000000000000000000000000000000000081525081565b6000815183511480156105ee5750816040518082805190602001908083835b602083101515610554578051825260208201915060208101905060208303925061052f565b6001836020036101000a038019825116818451168082178552505050505050905001915050604051809103902060001916836040518082805190602001908083835b6020831015156105bb5780518252602082019150602081019050602083039250610596565b6001836020036101000a038019825116818451168082178552505050505050905001915050604051809103902060001916145b9050929150505600a165627a7a72305820c111a6f03769cb77af804863af0cfe0b60c20c948be9bfb9ac14a99fc1a216060029",
+  "sourceMap": "708:1347:103:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;708:1347:103;;;;;;;",
+  "deployedSourceMap": "708:1347:103:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1463:590;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1463:590:103;;;;;;;;;;;;;;;;;;;;;;;;;;;1259:193;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1259:193:103;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;1259:193:103;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1463:590;1543:4;1563:30;1795:31;821:32;;;;;;;;;;;;;;;;;;;911:42;1596:57;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;1596:57:103;;;;;;;38:4:-1;29:7;25:18;67:10;61:17;96:58;199:8;192:4;186;182:15;179:29;167:10;160:49;0:215;;;1596:57:103;1563:90;;1684:46;1709:20;;;;;;;;;;;;;;;;;;;;;;;1684:17;:24;;:46;;;;:::i;:::-;1663:121;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;821:32;;;;;;;;;;;;;;;;;;;1211:42;1829:59;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;1829:59:103;;;;;;;38:4:-1;29:7;25:18;67:10;61:17;96:58;199:8;192:4;186;182:15;179:29;167:10;160:49;0:215;;;1829:59:103;1795:93;;1919:49;1945:22;;;;;;;;;;;;;;;;;;;;;;;1919:18;:25;;:49;;;;:::i;:::-;1898:126;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2042:4;2035:11;;1463:590;;;:::o;1259:193::-;;;;;;;;;;;;;;;;;;;;;;;;;:::o;9652:403:105:-;9773:10;10002:3;:10;9988:3;:10;:24;:60;;;;;10044:3;10034:14;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;10034:14:105;;;;;;;;;;;;;;;;10016:32;;;10026:3;10016:14;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;10016:14:105;;;;;;;;;;;;;;;;:32;;;;9988:60;9981:67;;9652:403;;;;:::o",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity 0.4.24;\n\nimport \"../../../../utils/contracts/utils/LibBytes/LibBytes.sol\";\n\n\n// solhint-disable max-line-length\ncontract TestConstants {\n   \n    using LibBytes for bytes;\n\n    bytes4 constant internal ERC20_PROXY_ID = bytes4(keccak256(\"ERC20Token(address)\"));\n    \n    address constant internal KOVAN_ZRX_ADDRESS = 0x6Ff6C0Ff1d68b964901F986d4C9FA3ac68346570;\n    bytes constant internal KOVAN_ZRX_ASSET_DATA = \"\\xf4\\x72\\x61\\xb0\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x6f\\xf6\\xc0\\xff\\x1d\\x68\\xb9\\x64\\x90\\x1f\\x98\\x6d\\x4c\\x9f\\xa3\\xac\\x68\\x34\\x65\\x70\";\n    \n    address constant internal MAINNET_ZRX_ADDRESS = 0xE41d2489571d322189246DaFA5ebDe1F4699F498;\n    bytes constant public MAINNET_ZRX_ASSET_DATA = \"\\xf4\\x72\\x61\\xb0\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\xe4\\x1d\\x24\\x89\\x57\\x1d\\x32\\x21\\x89\\x24\\x6d\\xaf\\xa5\\xeb\\xde\\x1f\\x46\\x99\\xf4\\x98\";\n    \n    function assertValidZrxAssetData()\n        public\n        pure\n        returns (bool)\n    {\n        bytes memory kovanZrxAssetData = abi.encodeWithSelector(ERC20_PROXY_ID, KOVAN_ZRX_ADDRESS);\n        require(\n            kovanZrxAssetData.equals(KOVAN_ZRX_ASSET_DATA),\n            \"INVALID_KOVAN_ZRX_ASSET_DATA\"\n        );\n\n        bytes memory mainetZrxAssetData = abi.encodeWithSelector(ERC20_PROXY_ID, MAINNET_ZRX_ADDRESS);\n        require(\n            mainetZrxAssetData.equals(MAINNET_ZRX_ASSET_DATA),\n            \"INVALID_MAINNET_ZRX_ASSET_DATA\"\n        );\n\n        return true;\n    }\n}\n// solhint-enable max-line-length",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/test/TestConstants/TestConstants.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/test/TestConstants/TestConstants.sol",
+    "exportedSymbols": {
+      "TestConstants": [
+        12628
+      ]
+    },
+    "id": 12629,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12564,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:23:103"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/utils/LibBytes/LibBytes.sol",
+        "file": "../../../../utils/contracts/utils/LibBytes/LibBytes.sol",
+        "id": 12565,
+        "nodeType": "ImportDirective",
+        "scope": 12629,
+        "sourceUnit": 13468,
+        "src": "605:65:103",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12628,
+        "linearizedBaseContracts": [
+          12628
+        ],
+        "name": "TestConstants",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 12568,
+            "libraryName": {
+              "contractScope": null,
+              "id": 12566,
+              "name": "LibBytes",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13467,
+              "src": "747:8:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_LibBytes_$13467",
+                "typeString": "library LibBytes"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "741:25:103",
+            "typeName": {
+              "id": 12567,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "760:5:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            }
+          },
+          {
+            "constant": true,
+            "id": 12575,
+            "name": "ERC20_PROXY_ID",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "772:82:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes4",
+              "typeString": "bytes4"
+            },
+            "typeName": {
+              "id": 12569,
+              "name": "bytes4",
+              "nodeType": "ElementaryTypeName",
+              "src": "772:6:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes4",
+                "typeString": "bytes4"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "arguments": [
+                {
+                  "argumentTypes": null,
+                  "arguments": [
+                    {
+                      "argumentTypes": null,
+                      "hexValue": "4552433230546f6b656e286164647265737329",
+                      "id": 12572,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "831:21:103",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_f47261b06eedbfce68afd46d0f3c27c60b03faad319eaf33103611cf8f6456ad",
+                        "typeString": "literal_string \"ERC20Token(address)\""
+                      },
+                      "value": "ERC20Token(address)"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_f47261b06eedbfce68afd46d0f3c27c60b03faad319eaf33103611cf8f6456ad",
+                        "typeString": "literal_string \"ERC20Token(address)\""
+                      }
+                    ],
+                    "id": 12571,
+                    "name": "keccak256",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 13725,
+                    "src": "821:9:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
+                      "typeString": "function () pure returns (bytes32)"
+                    }
+                  },
+                  "id": 12573,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "821:32:103",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                ],
+                "id": 12570,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "lValueRequested": false,
+                "nodeType": "ElementaryTypeNameExpression",
+                "src": "814:6:103",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_type$_t_bytes4_$",
+                  "typeString": "type(bytes4)"
+                },
+                "typeName": "bytes4"
+              },
+              "id": 12574,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "typeConversion",
+              "lValueRequested": false,
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "814:40:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes4",
+                "typeString": "bytes4"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12578,
+            "name": "KOVAN_ZRX_ADDRESS",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "865:88:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 12576,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "865:7:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836466636433046663164363862393634393031463938366434433946413361633638333436353730",
+              "id": 12577,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "911:42:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              },
+              "value": "0x6Ff6C0Ff1d68b964901F986d4C9FA3ac68346570"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12581,
+            "name": "KOVAN_ZRX_ASSET_DATA",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "959:193:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_memory",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 12579,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "959:5:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "f47261b00000000000000000000000006ff6c0ff1d68b964901f986d4c9fa3ac68346570",
+              "id": 12580,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1006:146:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_9dbbe67988f02d0c3df8501cb6528b8cb1ba4dd4f4eb02dbe3348e153925f56d",
+                "typeString": "literal_string (contains invalid UTF-8 sequence at position 3)"
+              },
+              "value": null
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12584,
+            "name": "MAINNET_ZRX_ADDRESS",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "1163:90:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 12582,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "1163:7:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307845343164323438393537316433323231383932343644614641356562446531463436393946343938",
+              "id": 12583,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1211:42:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              },
+              "value": "0xE41d2489571d322189246DaFA5ebDe1F4699F498"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12587,
+            "name": "MAINNET_ZRX_ASSET_DATA",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "1259:193:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_memory",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 12585,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "1259:5:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "f47261b0000000000000000000000000e41d2489571d322189246dafa5ebde1f4699f498",
+              "id": 12586,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1306:146:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_517c29a34a780e98f5e9210e3b64eb75040617e433aa04ba426ed2ee7bf785c0",
+                "typeString": "literal_string (contains invalid UTF-8 sequence at position 3)"
+              },
+              "value": null
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12626,
+              "nodeType": "Block",
+              "src": "1553:500:103",
+              "statements": [
+                {
+                  "assignments": [
+                    12593
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 12593,
+                      "name": "kovanZrxAssetData",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 12627,
+                      "src": "1563:30:103",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes"
+                      },
+                      "typeName": {
+                        "id": 12592,
+                        "name": "bytes",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1563:5:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_storage_ptr",
+                          "typeString": "bytes"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 12599,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 12596,
+                        "name": "ERC20_PROXY_ID",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12575,
+                        "src": "1619:14:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 12597,
+                        "name": "KOVAN_ZRX_ADDRESS",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12578,
+                        "src": "1635:17:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 12594,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13718,
+                        "src": "1596:3:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 12595,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "encodeWithSelector",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1596:22:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abiencodewithselector_pure$_t_bytes4_$returns$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes4) pure returns (bytes memory)"
+                      }
+                    },
+                    "id": 12598,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1596:57:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1563:90:103"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 12603,
+                            "name": "KOVAN_ZRX_ASSET_DATA",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12581,
+                            "src": "1709:20:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 12601,
+                            "name": "kovanZrxAssetData",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12593,
+                            "src": "1684:17:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          },
+                          "id": 12602,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "equals",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 13193,
+                          "src": "1684:24:103",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_bool_$bound_to$_t_bytes_memory_ptr_$",
+                            "typeString": "function (bytes memory,bytes memory) pure returns (bool)"
+                          }
+                        },
+                        "id": 12604,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1684:46:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "494e56414c49445f4b4f56414e5f5a52585f41535345545f44415441",
+                        "id": 12605,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1744:30:103",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_7422973bb90d8c6da56b2f75ba78f25f99dd2a169985f110d59e28fbd3805639",
+                          "typeString": "literal_string \"INVALID_KOVAN_ZRX_ASSET_DATA\""
+                        },
+                        "value": "INVALID_KOVAN_ZRX_ASSET_DATA"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_7422973bb90d8c6da56b2f75ba78f25f99dd2a169985f110d59e28fbd3805639",
+                          "typeString": "literal_string \"INVALID_KOVAN_ZRX_ASSET_DATA\""
+                        }
+                      ],
+                      "id": 12600,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13734,
+                        13735
+                      ],
+                      "referencedDeclaration": 13735,
+                      "src": "1663:7:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 12606,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1663:121:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 12607,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1663:121:103"
+                },
+                {
+                  "assignments": [
+                    12609
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 12609,
+                      "name": "mainetZrxAssetData",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 12627,
+                      "src": "1795:31:103",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes"
+                      },
+                      "typeName": {
+                        "id": 12608,
+                        "name": "bytes",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1795:5:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_storage_ptr",
+                          "typeString": "bytes"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 12615,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 12612,
+                        "name": "ERC20_PROXY_ID",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12575,
+                        "src": "1852:14:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 12613,
+                        "name": "MAINNET_ZRX_ADDRESS",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12584,
+                        "src": "1868:19:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 12610,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13718,
+                        "src": "1829:3:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 12611,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "encodeWithSelector",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1829:22:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abiencodewithselector_pure$_t_bytes4_$returns$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes4) pure returns (bytes memory)"
+                      }
+                    },
+                    "id": 12614,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1829:59:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1795:93:103"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 12619,
+                            "name": "MAINNET_ZRX_ASSET_DATA",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12587,
+                            "src": "1945:22:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 12617,
+                            "name": "mainetZrxAssetData",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12609,
+                            "src": "1919:18:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          },
+                          "id": 12618,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "equals",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 13193,
+                          "src": "1919:25:103",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_bool_$bound_to$_t_bytes_memory_ptr_$",
+                            "typeString": "function (bytes memory,bytes memory) pure returns (bool)"
+                          }
+                        },
+                        "id": 12620,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1919:49:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "494e56414c49445f4d41494e4e45545f5a52585f41535345545f44415441",
+                        "id": 12621,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1982:32:103",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_68a703c70495b546b5c376b65a57c53c50cc3e271185d9bbf21e6be88a4dac4f",
+                          "typeString": "literal_string \"INVALID_MAINNET_ZRX_ASSET_DATA\""
+                        },
+                        "value": "INVALID_MAINNET_ZRX_ASSET_DATA"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_68a703c70495b546b5c376b65a57c53c50cc3e271185d9bbf21e6be88a4dac4f",
+                          "typeString": "literal_string \"INVALID_MAINNET_ZRX_ASSET_DATA\""
+                        }
+                      ],
+                      "id": 12616,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13734,
+                        13735
+                      ],
+                      "referencedDeclaration": 13735,
+                      "src": "1898:7:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 12622,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1898:126:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 12623,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1898:126:103"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 12624,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2042:4:103",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 12591,
+                  "id": 12625,
+                  "nodeType": "Return",
+                  "src": "2035:11:103"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 12627,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertValidZrxAssetData",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 12588,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1495:2:103"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 12591,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12590,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12627,
+                  "src": "1543:4:103",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 12589,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1543:4:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1542:6:103"
+            },
+            "scope": 12628,
+            "src": "1463:590:103",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 12629,
+        "src": "708:1347:103"
+      }
+    ],
+    "src": "580:1509:103"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/test/TestConstants/TestConstants.sol",
+    "exportedSymbols": {
+      "TestConstants": [
+        12628
+      ]
+    },
+    "id": 12629,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12564,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:23:103"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/utils/LibBytes/LibBytes.sol",
+        "file": "../../../../utils/contracts/utils/LibBytes/LibBytes.sol",
+        "id": 12565,
+        "nodeType": "ImportDirective",
+        "scope": 12629,
+        "sourceUnit": 13468,
+        "src": "605:65:103",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12628,
+        "linearizedBaseContracts": [
+          12628
+        ],
+        "name": "TestConstants",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 12568,
+            "libraryName": {
+              "contractScope": null,
+              "id": 12566,
+              "name": "LibBytes",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13467,
+              "src": "747:8:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_LibBytes_$13467",
+                "typeString": "library LibBytes"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "741:25:103",
+            "typeName": {
+              "id": 12567,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "760:5:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            }
+          },
+          {
+            "constant": true,
+            "id": 12575,
+            "name": "ERC20_PROXY_ID",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "772:82:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes4",
+              "typeString": "bytes4"
+            },
+            "typeName": {
+              "id": 12569,
+              "name": "bytes4",
+              "nodeType": "ElementaryTypeName",
+              "src": "772:6:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes4",
+                "typeString": "bytes4"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "arguments": [
+                {
+                  "argumentTypes": null,
+                  "arguments": [
+                    {
+                      "argumentTypes": null,
+                      "hexValue": "4552433230546f6b656e286164647265737329",
+                      "id": 12572,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "831:21:103",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_f47261b06eedbfce68afd46d0f3c27c60b03faad319eaf33103611cf8f6456ad",
+                        "typeString": "literal_string \"ERC20Token(address)\""
+                      },
+                      "value": "ERC20Token(address)"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_f47261b06eedbfce68afd46d0f3c27c60b03faad319eaf33103611cf8f6456ad",
+                        "typeString": "literal_string \"ERC20Token(address)\""
+                      }
+                    ],
+                    "id": 12571,
+                    "name": "keccak256",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 13725,
+                    "src": "821:9:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
+                      "typeString": "function () pure returns (bytes32)"
+                    }
+                  },
+                  "id": 12573,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "821:32:103",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                ],
+                "id": 12570,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "lValueRequested": false,
+                "nodeType": "ElementaryTypeNameExpression",
+                "src": "814:6:103",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_type$_t_bytes4_$",
+                  "typeString": "type(bytes4)"
+                },
+                "typeName": "bytes4"
+              },
+              "id": 12574,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "typeConversion",
+              "lValueRequested": false,
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "814:40:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes4",
+                "typeString": "bytes4"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12578,
+            "name": "KOVAN_ZRX_ADDRESS",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "865:88:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 12576,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "865:7:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307836466636433046663164363862393634393031463938366434433946413361633638333436353730",
+              "id": 12577,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "911:42:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              },
+              "value": "0x6Ff6C0Ff1d68b964901F986d4C9FA3ac68346570"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12581,
+            "name": "KOVAN_ZRX_ASSET_DATA",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "959:193:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_memory",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 12579,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "959:5:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "f47261b00000000000000000000000006ff6c0ff1d68b964901f986d4c9fa3ac68346570",
+              "id": 12580,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1006:146:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_9dbbe67988f02d0c3df8501cb6528b8cb1ba4dd4f4eb02dbe3348e153925f56d",
+                "typeString": "literal_string (contains invalid UTF-8 sequence at position 3)"
+              },
+              "value": null
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12584,
+            "name": "MAINNET_ZRX_ADDRESS",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "1163:90:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 12582,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "1163:7:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "307845343164323438393537316433323231383932343644614641356562446531463436393946343938",
+              "id": 12583,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1211:42:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              },
+              "value": "0xE41d2489571d322189246DaFA5ebDe1F4699F498"
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "id": 12587,
+            "name": "MAINNET_ZRX_ASSET_DATA",
+            "nodeType": "VariableDeclaration",
+            "scope": 12628,
+            "src": "1259:193:103",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_memory",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 12585,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "1259:5:103",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "f47261b0000000000000000000000000e41d2489571d322189246dafa5ebde1f4699f498",
+              "id": 12586,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "1306:146:103",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_517c29a34a780e98f5e9210e3b64eb75040617e433aa04ba426ed2ee7bf785c0",
+                "typeString": "literal_string (contains invalid UTF-8 sequence at position 3)"
+              },
+              "value": null
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12626,
+              "nodeType": "Block",
+              "src": "1553:500:103",
+              "statements": [
+                {
+                  "assignments": [
+                    12593
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 12593,
+                      "name": "kovanZrxAssetData",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 12627,
+                      "src": "1563:30:103",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes"
+                      },
+                      "typeName": {
+                        "id": 12592,
+                        "name": "bytes",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1563:5:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_storage_ptr",
+                          "typeString": "bytes"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 12599,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 12596,
+                        "name": "ERC20_PROXY_ID",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12575,
+                        "src": "1619:14:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 12597,
+                        "name": "KOVAN_ZRX_ADDRESS",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12578,
+                        "src": "1635:17:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 12594,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13718,
+                        "src": "1596:3:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 12595,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "encodeWithSelector",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1596:22:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abiencodewithselector_pure$_t_bytes4_$returns$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes4) pure returns (bytes memory)"
+                      }
+                    },
+                    "id": 12598,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1596:57:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1563:90:103"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 12603,
+                            "name": "KOVAN_ZRX_ASSET_DATA",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12581,
+                            "src": "1709:20:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 12601,
+                            "name": "kovanZrxAssetData",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12593,
+                            "src": "1684:17:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          },
+                          "id": 12602,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "equals",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 13193,
+                          "src": "1684:24:103",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_bool_$bound_to$_t_bytes_memory_ptr_$",
+                            "typeString": "function (bytes memory,bytes memory) pure returns (bool)"
+                          }
+                        },
+                        "id": 12604,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1684:46:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "494e56414c49445f4b4f56414e5f5a52585f41535345545f44415441",
+                        "id": 12605,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1744:30:103",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_7422973bb90d8c6da56b2f75ba78f25f99dd2a169985f110d59e28fbd3805639",
+                          "typeString": "literal_string \"INVALID_KOVAN_ZRX_ASSET_DATA\""
+                        },
+                        "value": "INVALID_KOVAN_ZRX_ASSET_DATA"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_7422973bb90d8c6da56b2f75ba78f25f99dd2a169985f110d59e28fbd3805639",
+                          "typeString": "literal_string \"INVALID_KOVAN_ZRX_ASSET_DATA\""
+                        }
+                      ],
+                      "id": 12600,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13734,
+                        13735
+                      ],
+                      "referencedDeclaration": 13735,
+                      "src": "1663:7:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 12606,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1663:121:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 12607,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1663:121:103"
+                },
+                {
+                  "assignments": [
+                    12609
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 12609,
+                      "name": "mainetZrxAssetData",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 12627,
+                      "src": "1795:31:103",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes"
+                      },
+                      "typeName": {
+                        "id": 12608,
+                        "name": "bytes",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1795:5:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_storage_ptr",
+                          "typeString": "bytes"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 12615,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 12612,
+                        "name": "ERC20_PROXY_ID",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12575,
+                        "src": "1852:14:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 12613,
+                        "name": "MAINNET_ZRX_ADDRESS",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12584,
+                        "src": "1868:19:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes4",
+                          "typeString": "bytes4"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 12610,
+                        "name": "abi",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13718,
+                        "src": "1829:3:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_abi",
+                          "typeString": "abi"
+                        }
+                      },
+                      "id": 12611,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberName": "encodeWithSelector",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1829:22:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_abiencodewithselector_pure$_t_bytes4_$returns$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes4) pure returns (bytes memory)"
+                      }
+                    },
+                    "id": 12614,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1829:59:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1795:93:103"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 12619,
+                            "name": "MAINNET_ZRX_ASSET_DATA",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12587,
+                            "src": "1945:22:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 12617,
+                            "name": "mainetZrxAssetData",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 12609,
+                            "src": "1919:18:103",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          },
+                          "id": 12618,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "equals",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 13193,
+                          "src": "1919:25:103",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_bool_$bound_to$_t_bytes_memory_ptr_$",
+                            "typeString": "function (bytes memory,bytes memory) pure returns (bool)"
+                          }
+                        },
+                        "id": 12620,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1919:49:103",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "494e56414c49445f4d41494e4e45545f5a52585f41535345545f44415441",
+                        "id": 12621,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1982:32:103",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_68a703c70495b546b5c376b65a57c53c50cc3e271185d9bbf21e6be88a4dac4f",
+                          "typeString": "literal_string \"INVALID_MAINNET_ZRX_ASSET_DATA\""
+                        },
+                        "value": "INVALID_MAINNET_ZRX_ASSET_DATA"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_68a703c70495b546b5c376b65a57c53c50cc3e271185d9bbf21e6be88a4dac4f",
+                          "typeString": "literal_string \"INVALID_MAINNET_ZRX_ASSET_DATA\""
+                        }
+                      ],
+                      "id": 12616,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13734,
+                        13735
+                      ],
+                      "referencedDeclaration": 13735,
+                      "src": "1898:7:103",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 12622,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1898:126:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 12623,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1898:126:103"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 12624,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "2042:4:103",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 12591,
+                  "id": 12625,
+                  "nodeType": "Return",
+                  "src": "2035:11:103"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 12627,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertValidZrxAssetData",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 12588,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1495:2:103"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 12591,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12590,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12627,
+                  "src": "1543:4:103",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 12589,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1543:4:103",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1542:6:103"
+            },
+            "scope": 12628,
+            "src": "1463:590:103",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 12629,
+        "src": "708:1347:103"
+      }
+    ],
+    "src": "580:1509:103"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:11.016Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

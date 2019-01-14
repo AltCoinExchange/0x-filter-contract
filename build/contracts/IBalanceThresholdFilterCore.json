@@ -1,0 +1,410 @@
+{
+  "contractName": "IBalanceThresholdFilterCore",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "salt",
+          "type": "uint256"
+        },
+        {
+          "name": "signerAddress",
+          "type": "address"
+        },
+        {
+          "name": "signedExchangeTransaction",
+          "type": "bytes"
+        },
+        {
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "executeTransaction",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "\n/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\n\n\ncontract IBalanceThresholdFilterCore {\n    \n    /// @dev Executes an Exchange transaction iff the maker and taker meet \n    ///      the hold at least `BALANCE_THRESHOLD` of the asset `THRESHOLD_ASSET` OR \n    ///      the exchange function is a cancellation.\n    ///      Supported Exchange functions:\n    ///         - batchFillOrders\n    ///         - batchFillOrdersNoThrow\n    ///         - batchFillOrKillOrders\n    ///         - fillOrder\n    ///         - fillOrderNoThrow\n    ///         - fillOrKillOrder\n    ///         - marketBuyOrders\n    ///         - marketBuyOrdersNoThrow\n    ///         - marketSellOrders\n    ///         - marketSellOrdersNoThrow\n    ///         - matchOrders\n    ///         - cancelOrder\n    ///         - batchCancelOrders\n    ///         - cancelOrdersUpTo\n    ///     Trying to call any other exchange function will throw.\n    /// @param salt Arbitrary number to ensure uniqueness of transaction hash.\n    /// @param signerAddress Address of transaction signer.\n    /// @param signedExchangeTransaction AbiV2 encoded calldata.\n    /// @param signature Proof of signer transaction by signer.\n    function executeTransaction(\n        uint256 salt,\n        address signerAddress,\n        bytes signedExchangeTransaction,\n        bytes signature\n    ) \n        external;\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IBalanceThresholdFilterCore.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IBalanceThresholdFilterCore.sol",
+    "exportedSymbols": {
+      "IBalanceThresholdFilterCore": [
+        635
+      ]
+    },
+    "id": 636,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 623,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "581:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 635,
+        "linearizedBaseContracts": [
+          635
+        ],
+        "name": "IBalanceThresholdFilterCore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Executes an Exchange transaction iff the maker and taker meet \n      the hold at least `BALANCE_THRESHOLD` of the asset `THRESHOLD_ASSET` OR \n      the exchange function is a cancellation.\n      Supported Exchange functions:\n         - batchFillOrders\n         - batchFillOrdersNoThrow\n         - batchFillOrKillOrders\n         - fillOrder\n         - fillOrderNoThrow\n         - fillOrKillOrder\n         - marketBuyOrders\n         - marketBuyOrdersNoThrow\n         - marketSellOrders\n         - marketSellOrdersNoThrow\n         - matchOrders\n         - cancelOrder\n         - batchCancelOrders\n         - cancelOrdersUpTo\n     Trying to call any other exchange function will throw.\n @param salt Arbitrary number to ensure uniqueness of transaction hash.\n @param signerAddress Address of transaction signer.\n @param signedExchangeTransaction AbiV2 encoded calldata.\n @param signature Proof of signer transaction by signer.",
+            "id": 634,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "executeTransaction",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 632,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 625,
+                  "name": "salt",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1782:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 624,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1782:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 627,
+                  "name": "signerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1804:21:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 626,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1804:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 629,
+                  "name": "signedExchangeTransaction",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1835:31:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 628,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1835:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 631,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1876:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 630,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1876:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1772:125:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 633,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1915:0:5"
+            },
+            "scope": 635,
+            "src": "1745:171:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 636,
+        "src": "608:1310:5"
+      }
+    ],
+    "src": "581:1338:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/BalanceThresholdFilter/interfaces/IBalanceThresholdFilterCore.sol",
+    "exportedSymbols": {
+      "IBalanceThresholdFilterCore": [
+        635
+      ]
+    },
+    "id": 636,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 623,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "581:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 635,
+        "linearizedBaseContracts": [
+          635
+        ],
+        "name": "IBalanceThresholdFilterCore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@dev Executes an Exchange transaction iff the maker and taker meet \n      the hold at least `BALANCE_THRESHOLD` of the asset `THRESHOLD_ASSET` OR \n      the exchange function is a cancellation.\n      Supported Exchange functions:\n         - batchFillOrders\n         - batchFillOrdersNoThrow\n         - batchFillOrKillOrders\n         - fillOrder\n         - fillOrderNoThrow\n         - fillOrKillOrder\n         - marketBuyOrders\n         - marketBuyOrdersNoThrow\n         - marketSellOrders\n         - marketSellOrdersNoThrow\n         - matchOrders\n         - cancelOrder\n         - batchCancelOrders\n         - cancelOrdersUpTo\n     Trying to call any other exchange function will throw.\n @param salt Arbitrary number to ensure uniqueness of transaction hash.\n @param signerAddress Address of transaction signer.\n @param signedExchangeTransaction AbiV2 encoded calldata.\n @param signature Proof of signer transaction by signer.",
+            "id": 634,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "executeTransaction",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 632,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 625,
+                  "name": "salt",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1782:12:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 624,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1782:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 627,
+                  "name": "signerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1804:21:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 626,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1804:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 629,
+                  "name": "signedExchangeTransaction",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1835:31:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 628,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1835:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 631,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 634,
+                  "src": "1876:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 630,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1876:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1772:125:5"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 633,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1915:0:5"
+            },
+            "scope": 635,
+            "src": "1745:171:5",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 636,
+        "src": "608:1310:5"
+      }
+    ],
+    "src": "581:1338:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:10.917Z",
+  "devdoc": {
+    "methods": {
+      "executeTransaction(uint256,address,bytes,bytes)": {
+        "details": "Executes an Exchange transaction iff the maker and taker meet       the hold at least `BALANCE_THRESHOLD` of the asset `THRESHOLD_ASSET` OR       the exchange function is a cancellation.      Supported Exchange functions:         - batchFillOrders         - batchFillOrdersNoThrow         - batchFillOrKillOrders         - fillOrder         - fillOrderNoThrow         - fillOrKillOrder         - marketBuyOrders         - marketBuyOrdersNoThrow         - marketSellOrders         - marketSellOrdersNoThrow         - matchOrders         - cancelOrder         - batchCancelOrders         - cancelOrdersUpTo     Trying to call any other exchange function will throw.",
+        "params": {
+          "salt": "Arbitrary number to ensure uniqueness of transaction hash.",
+          "signature": "Proof of signer transaction by signer.",
+          "signedExchangeTransaction": "AbiV2 encoded calldata.",
+          "signerAddress": "Address of transaction signer."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

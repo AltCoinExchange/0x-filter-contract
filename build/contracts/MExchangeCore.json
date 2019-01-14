@@ -1,0 +1,3702 @@
+{
+  "contractName": "MExchangeCore",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "targetOrderEpoch",
+          "type": "uint256"
+        }
+      ],
+      "name": "cancelOrdersUpTo",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "order",
+          "type": "tuple"
+        },
+        {
+          "name": "takerAssetFillAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "fillOrder",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "makerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetFilledAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFeePaid",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFeePaid",
+              "type": "uint256"
+            }
+          ],
+          "name": "fillResults",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "order",
+          "type": "tuple"
+        }
+      ],
+      "name": "getOrderInfo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "orderStatus",
+              "type": "uint8"
+            },
+            {
+              "name": "orderHash",
+              "type": "bytes32"
+            },
+            {
+              "name": "orderTakerAssetFilledAmount",
+              "type": "uint256"
+            }
+          ],
+          "name": "orderInfo",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "order",
+          "type": "tuple"
+        }
+      ],
+      "name": "cancelOrder",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "makerAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "feeRecipientAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "takerAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "senderAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "makerAssetFilledAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "takerAssetFilledAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "makerFeePaid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "takerFeePaid",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "orderHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "makerAssetData",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "name": "takerAssetData",
+          "type": "bytes"
+        }
+      ],
+      "name": "Fill",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "makerAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "feeRecipientAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "senderAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "orderHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "makerAssetData",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "name": "takerAssetData",
+          "type": "bytes"
+        }
+      ],
+      "name": "Cancel",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "makerAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "senderAddress",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "orderEpoch",
+          "type": "uint256"
+        }
+      ],
+      "name": "CancelUpTo",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\npragma experimental ABIEncoderV2;\n\nimport \"../../../../../libs/contracts/libs/LibOrder.sol\";\nimport \"../../../../../libs/contracts/libs/LibFillResults.sol\";\nimport \"../../../../../interfaces/contracts/protocol/Exchange/IExchangeCore.sol\";\n\n\ncontract MExchangeCore is\n    IExchangeCore\n{\n    // Fill event is emitted whenever an order is filled.\n    event Fill(\n        address indexed makerAddress,         // Address that created the order.      \n        address indexed feeRecipientAddress,  // Address that received fees.\n        address takerAddress,                 // Address that filled the order.\n        address senderAddress,                // Address that called the Exchange contract (msg.sender).\n        uint256 makerAssetFilledAmount,       // Amount of makerAsset sold by maker and bought by taker. \n        uint256 takerAssetFilledAmount,       // Amount of takerAsset sold by taker and bought by maker.\n        uint256 makerFeePaid,                 // Amount of ZRX paid to feeRecipient by maker.\n        uint256 takerFeePaid,                 // Amount of ZRX paid to feeRecipient by taker.\n        bytes32 indexed orderHash,            // EIP712 hash of order (see LibOrder.getOrderHash).\n        bytes makerAssetData,                 // Encoded data specific to makerAsset. \n        bytes takerAssetData                  // Encoded data specific to takerAsset.\n    );\n\n    // Cancel event is emitted whenever an individual order is cancelled.\n    event Cancel(\n        address indexed makerAddress,         // Address that created the order.      \n        address indexed feeRecipientAddress,  // Address that would have recieved fees if order was filled.   \n        address senderAddress,                // Address that called the Exchange contract (msg.sender).\n        bytes32 indexed orderHash,            // EIP712 hash of order (see LibOrder.getOrderHash).\n        bytes makerAssetData,                 // Encoded data specific to makerAsset. \n        bytes takerAssetData                  // Encoded data specific to takerAsset.\n    );\n\n    // CancelUpTo event is emitted whenever `cancelOrdersUpTo` is executed succesfully.\n    event CancelUpTo(\n        address indexed makerAddress,         // Orders cancelled must have been created by this address.\n        address indexed senderAddress,        // Orders cancelled must have a `senderAddress` equal to this address.\n        uint256 orderEpoch                    // Orders with specified makerAddress and senderAddress with a salt less than this value are considered cancelled.\n    );\n\n    /// @dev Fills the input order.\n    /// @param order Order struct containing order specifications.\n    /// @param takerAssetFillAmount Desired amount of takerAsset to sell.\n    /// @param signature Proof that order has been created by maker.\n    /// @return Amounts filled and fees paid by maker and taker.\n    function fillOrderInternal(\n        LibOrder.Order memory order,\n        uint256 takerAssetFillAmount,\n        bytes memory signature\n    )\n        internal\n        returns (LibFillResults.FillResults memory fillResults);\n\n    /// @dev After calling, the order can not be filled anymore.\n    /// @param order Order struct containing order specifications.\n    function cancelOrderInternal(LibOrder.Order memory order)\n        internal;\n\n    /// @dev Updates state with results of a fill order.\n    /// @param order that was filled.\n    /// @param takerAddress Address of taker who filled the order.\n    /// @param orderTakerAssetFilledAmount Amount of order already filled.\n    /// @return fillResults Amounts filled and fees paid by maker and taker.\n    function updateFilledState(\n        LibOrder.Order memory order,\n        address takerAddress,\n        bytes32 orderHash,\n        uint256 orderTakerAssetFilledAmount,\n        LibFillResults.FillResults memory fillResults\n    )\n        internal;\n\n    /// @dev Updates state with results of cancelling an order.\n    ///      State is only updated if the order is currently fillable.\n    ///      Otherwise, updating state would have no effect.\n    /// @param order that was cancelled.\n    /// @param orderHash Hash of order that was cancelled.\n    function updateCancelledState(\n        LibOrder.Order memory order,\n        bytes32 orderHash\n    )\n        internal;\n    \n    /// @dev Validates context for fillOrder. Succeeds or throws.\n    /// @param order to be filled.\n    /// @param orderInfo OrderStatus, orderHash, and amount already filled of order.\n    /// @param takerAddress Address of order taker.\n    /// @param signature Proof that the orders was created by its maker.\n    function assertFillableOrder(\n        LibOrder.Order memory order,\n        LibOrder.OrderInfo memory orderInfo,\n        address takerAddress,\n        bytes memory signature\n    )\n        internal\n        view;\n    \n    /// @dev Validates context for fillOrder. Succeeds or throws.\n    /// @param order to be filled.\n    /// @param orderInfo Status, orderHash, and amount already filled of order.\n    /// @param takerAssetFillAmount Desired amount of order to fill by taker.\n    /// @param takerAssetFilledAmount Amount of takerAsset that will be filled.\n    /// @param makerAssetFilledAmount Amount of makerAsset that will be transfered.\n    function assertValidFill(\n        LibOrder.Order memory order,\n        LibOrder.OrderInfo memory orderInfo,\n        uint256 takerAssetFillAmount,\n        uint256 takerAssetFilledAmount,\n        uint256 makerAssetFilledAmount\n    )\n        internal\n        view;\n\n    /// @dev Validates context for cancelOrder. Succeeds or throws.\n    /// @param order to be cancelled.\n    /// @param orderInfo OrderStatus, orderHash, and amount already filled of order.\n    function assertValidCancel(\n        LibOrder.Order memory order,\n        LibOrder.OrderInfo memory orderInfo\n    )\n        internal\n        view;\n\n    /// @dev Calculates amounts filled and fees paid by maker and taker.\n    /// @param order to be filled.\n    /// @param takerAssetFilledAmount Amount of takerAsset that will be filled.\n    /// @return fillResults Amounts filled and fees paid by maker and taker.\n    function calculateFillResults(\n        LibOrder.Order memory order,\n        uint256 takerAssetFilledAmount\n    )\n        internal\n        pure\n        returns (LibFillResults.FillResults memory fillResults);\n\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/protocol/contracts/protocol/Exchange/mixins/MExchangeCore.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/protocol/contracts/protocol/Exchange/mixins/MExchangeCore.sol",
+    "exportedSymbols": {
+      "MExchangeCore": [
+        9555
+      ]
+    },
+    "id": 9556,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 9426,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:72"
+      },
+      {
+        "id": 9427,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:72"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../../../libs/contracts/libs/LibOrder.sol",
+        "id": 9428,
+        "nodeType": "ImportDirective",
+        "scope": 9556,
+        "sourceUnit": 4793,
+        "src": "640:57:72",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibFillResults.sol",
+        "file": "../../../../../libs/contracts/libs/LibFillResults.sol",
+        "id": 9429,
+        "nodeType": "ImportDirective",
+        "scope": 9556,
+        "sourceUnit": 4404,
+        "src": "698:63:72",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/interfaces/contracts/protocol/Exchange/IExchangeCore.sol",
+        "file": "../../../../../interfaces/contracts/protocol/Exchange/IExchangeCore.sol",
+        "id": 9430,
+        "nodeType": "ImportDirective",
+        "scope": 9556,
+        "sourceUnit": 3482,
+        "src": "762:81:72",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 9431,
+              "name": "IExchangeCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3481,
+              "src": "876:13:72",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IExchangeCore_$3481",
+                "typeString": "contract IExchangeCore"
+              }
+            },
+            "id": 9432,
+            "nodeType": "InheritanceSpecifier",
+            "src": "876:13:72"
+          }
+        ],
+        "contractDependencies": [
+          3481
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 9555,
+        "linearizedBaseContracts": [
+          9555,
+          3481
+        ],
+        "name": "MExchangeCore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 9456,
+            "name": "Fill",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9455,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9434,
+                  "indexed": true,
+                  "name": "makerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "974:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9433,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "974:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9436,
+                  "indexed": true,
+                  "name": "feeRecipientAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1061:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9435,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1061:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9438,
+                  "indexed": false,
+                  "name": "takerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1138:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9437,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1138:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9440,
+                  "indexed": false,
+                  "name": "senderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1218:21:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9439,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1218:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9442,
+                  "indexed": false,
+                  "name": "makerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1323:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9441,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1323:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9444,
+                  "indexed": false,
+                  "name": "takerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1429:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9443,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1429:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9446,
+                  "indexed": false,
+                  "name": "makerFeePaid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1534:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9445,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1534:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9448,
+                  "indexed": false,
+                  "name": "takerFeePaid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1628:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9447,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1628:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9450,
+                  "indexed": true,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1722:25:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9449,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1722:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9452,
+                  "indexed": false,
+                  "name": "makerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1821:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9451,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1821:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9454,
+                  "indexed": false,
+                  "name": "takerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1908:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9453,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1908:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "964:1027:72"
+            },
+            "src": "954:1038:72"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 9470,
+            "name": "Cancel",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9469,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9458,
+                  "indexed": true,
+                  "name": "makerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2094:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9457,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2094:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9460,
+                  "indexed": true,
+                  "name": "feeRecipientAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2181:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9459,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2181:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9462,
+                  "indexed": false,
+                  "name": "senderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2292:21:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9461,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2292:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9464,
+                  "indexed": true,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2397:25:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9463,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2397:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9466,
+                  "indexed": false,
+                  "name": "makerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2496:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9465,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2496:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9468,
+                  "indexed": false,
+                  "name": "takerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2583:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9467,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2583:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2084:582:72"
+            },
+            "src": "2072:595:72"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 9478,
+            "name": "CancelUpTo",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9477,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9472,
+                  "indexed": true,
+                  "name": "makerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9478,
+                  "src": "2787:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9471,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2787:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9474,
+                  "indexed": true,
+                  "name": "senderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9478,
+                  "src": "2893:29:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9473,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2893:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9476,
+                  "indexed": false,
+                  "name": "orderEpoch",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9478,
+                  "src": "3010:18:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9475,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3010:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2777:391:72"
+            },
+            "src": "2761:408:72"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Fills the input order.\n @param order Order struct containing order specifications.\n @param takerAssetFillAmount Desired amount of takerAsset to sell.\n @param signature Proof that order has been created by maker.\n @return Amounts filled and fees paid by maker and taker.",
+            "id": 9489,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "fillOrderInternal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9485,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9480,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3522:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9479,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "3522:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9482,
+                  "name": "takerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3559:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9481,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3559:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9484,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3597:22:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9483,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3597:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3512:113:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9488,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9487,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3660:45:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9486,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "3660:26:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3659:47:72"
+            },
+            "scope": 9555,
+            "src": "3486:221:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev After calling, the order can not be filled anymore.\n @param order Order struct containing order specifications.",
+            "id": 9494,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "cancelOrderInternal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9492,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9491,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9494,
+                  "src": "3874:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9490,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "3874:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3873:29:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9493,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3919:0:72"
+            },
+            "scope": 9555,
+            "src": "3845:75:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Updates state with results of a fill order.\n @param order that was filled.\n @param takerAddress Address of taker who filled the order.\n @param orderTakerAssetFilledAmount Amount of order already filled.\n @return fillResults Amounts filled and fees paid by maker and taker.",
+            "id": 9507,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "updateFilledState",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9505,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9496,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4276:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9495,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "4276:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9498,
+                  "name": "takerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4313:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9497,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4313:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9500,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4343:17:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9499,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4343:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9502,
+                  "name": "orderTakerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4370:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9501,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4370:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9504,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4415:45:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9503,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "4415:26:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4266:200:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9506,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4483:0:72"
+            },
+            "scope": 9555,
+            "src": "4240:244:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Updates state with results of cancelling an order.\n      State is only updated if the order is currently fillable.\n      Otherwise, updating state would have no effect.\n @param order that was cancelled.\n @param orderHash Hash of order that was cancelled.",
+            "id": 9514,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "updateCancelledState",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9512,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9509,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9514,
+                  "src": "4825:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9508,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "4825:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9511,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9514,
+                  "src": "4862:17:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9510,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4862:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4815:70:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9513,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4902:0:72"
+            },
+            "scope": 9555,
+            "src": "4786:117:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Validates context for fillOrder. Succeeds or throws.\n @param order to be filled.\n @param orderInfo OrderStatus, orderHash, and amount already filled of order.\n @param takerAddress Address of order taker.\n @param signature Proof that the orders was created by its maker.",
+            "id": 9525,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertFillableOrder",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9523,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9516,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5262:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9515,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "5262:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9518,
+                  "name": "orderInfo",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5299:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                    "typeString": "struct LibOrder.OrderInfo"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9517,
+                    "name": "LibOrder.OrderInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4744,
+                    "src": "5299:18:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                      "typeString": "struct LibOrder.OrderInfo"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9520,
+                  "name": "takerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5344:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9519,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5344:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9522,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5374:22:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9521,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5374:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5252:150:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9524,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5432:0:72"
+            },
+            "scope": 9555,
+            "src": "5224:209:72",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Validates context for fillOrder. Succeeds or throws.\n @param order to be filled.\n @param orderInfo Status, orderHash, and amount already filled of order.\n @param takerAssetFillAmount Desired amount of order to fill by taker.\n @param takerAssetFilledAmount Amount of takerAsset that will be filled.\n @param makerAssetFilledAmount Amount of makerAsset that will be transfered.",
+            "id": 9538,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertValidFill",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9536,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9527,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "5900:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9526,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "5900:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9529,
+                  "name": "orderInfo",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "5937:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                    "typeString": "struct LibOrder.OrderInfo"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9528,
+                    "name": "LibOrder.OrderInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4744,
+                    "src": "5937:18:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                      "typeString": "struct LibOrder.OrderInfo"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9531,
+                  "name": "takerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "5982:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9530,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5982:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9533,
+                  "name": "takerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "6020:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9532,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6020:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9535,
+                  "name": "makerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "6060:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9534,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6060:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5890:206:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9537,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6126:0:72"
+            },
+            "scope": 9555,
+            "src": "5866:261:72",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Validates context for cancelOrder. Succeeds or throws.\n @param order to be cancelled.\n @param orderInfo OrderStatus, orderHash, and amount already filled of order.",
+            "id": 9545,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertValidCancel",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9543,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9540,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9545,
+                  "src": "6360:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9539,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "6360:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9542,
+                  "name": "orderInfo",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9545,
+                  "src": "6397:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                    "typeString": "struct LibOrder.OrderInfo"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9541,
+                    "name": "LibOrder.OrderInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4744,
+                    "src": "6397:18:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                      "typeString": "struct LibOrder.OrderInfo"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6350:88:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9544,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6468:0:72"
+            },
+            "scope": 9555,
+            "src": "6324:145:72",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Calculates amounts filled and fees paid by maker and taker.\n @param order to be filled.\n @param takerAssetFilledAmount Amount of takerAsset that will be filled.\n @return fillResults Amounts filled and fees paid by maker and taker.",
+            "id": 9554,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "calculateFillResults",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9550,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9547,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9554,
+                  "src": "6779:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9546,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "6779:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9549,
+                  "name": "takerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9554,
+                  "src": "6816:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9548,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6816:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6769:83:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9553,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9552,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9554,
+                  "src": "6900:45:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9551,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "6900:26:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6899:47:72"
+            },
+            "scope": 9555,
+            "src": "6740:207:72",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 9556,
+        "src": "846:6104:72"
+      }
+    ],
+    "src": "580:6371:72"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/protocol/contracts/protocol/Exchange/mixins/MExchangeCore.sol",
+    "exportedSymbols": {
+      "MExchangeCore": [
+        9555
+      ]
+    },
+    "id": 9556,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 9426,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:72"
+      },
+      {
+        "id": 9427,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:72"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../../../libs/contracts/libs/LibOrder.sol",
+        "id": 9428,
+        "nodeType": "ImportDirective",
+        "scope": 9556,
+        "sourceUnit": 4793,
+        "src": "640:57:72",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibFillResults.sol",
+        "file": "../../../../../libs/contracts/libs/LibFillResults.sol",
+        "id": 9429,
+        "nodeType": "ImportDirective",
+        "scope": 9556,
+        "sourceUnit": 4404,
+        "src": "698:63:72",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/interfaces/contracts/protocol/Exchange/IExchangeCore.sol",
+        "file": "../../../../../interfaces/contracts/protocol/Exchange/IExchangeCore.sol",
+        "id": 9430,
+        "nodeType": "ImportDirective",
+        "scope": 9556,
+        "sourceUnit": 3482,
+        "src": "762:81:72",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 9431,
+              "name": "IExchangeCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3481,
+              "src": "876:13:72",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IExchangeCore_$3481",
+                "typeString": "contract IExchangeCore"
+              }
+            },
+            "id": 9432,
+            "nodeType": "InheritanceSpecifier",
+            "src": "876:13:72"
+          }
+        ],
+        "contractDependencies": [
+          3481
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 9555,
+        "linearizedBaseContracts": [
+          9555,
+          3481
+        ],
+        "name": "MExchangeCore",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 9456,
+            "name": "Fill",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9455,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9434,
+                  "indexed": true,
+                  "name": "makerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "974:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9433,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "974:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9436,
+                  "indexed": true,
+                  "name": "feeRecipientAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1061:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9435,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1061:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9438,
+                  "indexed": false,
+                  "name": "takerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1138:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9437,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1138:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9440,
+                  "indexed": false,
+                  "name": "senderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1218:21:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9439,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1218:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9442,
+                  "indexed": false,
+                  "name": "makerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1323:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9441,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1323:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9444,
+                  "indexed": false,
+                  "name": "takerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1429:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9443,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1429:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9446,
+                  "indexed": false,
+                  "name": "makerFeePaid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1534:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9445,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1534:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9448,
+                  "indexed": false,
+                  "name": "takerFeePaid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1628:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9447,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1628:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9450,
+                  "indexed": true,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1722:25:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9449,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1722:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9452,
+                  "indexed": false,
+                  "name": "makerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1821:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9451,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1821:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9454,
+                  "indexed": false,
+                  "name": "takerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9456,
+                  "src": "1908:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9453,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1908:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "964:1027:72"
+            },
+            "src": "954:1038:72"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 9470,
+            "name": "Cancel",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9469,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9458,
+                  "indexed": true,
+                  "name": "makerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2094:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9457,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2094:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9460,
+                  "indexed": true,
+                  "name": "feeRecipientAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2181:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9459,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2181:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9462,
+                  "indexed": false,
+                  "name": "senderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2292:21:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9461,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2292:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9464,
+                  "indexed": true,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2397:25:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9463,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2397:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9466,
+                  "indexed": false,
+                  "name": "makerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2496:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9465,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2496:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9468,
+                  "indexed": false,
+                  "name": "takerAssetData",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9470,
+                  "src": "2583:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9467,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2583:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2084:582:72"
+            },
+            "src": "2072:595:72"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 9478,
+            "name": "CancelUpTo",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 9477,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9472,
+                  "indexed": true,
+                  "name": "makerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9478,
+                  "src": "2787:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9471,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2787:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9474,
+                  "indexed": true,
+                  "name": "senderAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9478,
+                  "src": "2893:29:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9473,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2893:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9476,
+                  "indexed": false,
+                  "name": "orderEpoch",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9478,
+                  "src": "3010:18:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9475,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3010:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2777:391:72"
+            },
+            "src": "2761:408:72"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Fills the input order.\n @param order Order struct containing order specifications.\n @param takerAssetFillAmount Desired amount of takerAsset to sell.\n @param signature Proof that order has been created by maker.\n @return Amounts filled and fees paid by maker and taker.",
+            "id": 9489,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "fillOrderInternal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9485,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9480,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3522:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9479,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "3522:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9482,
+                  "name": "takerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3559:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9481,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3559:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9484,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3597:22:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9483,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3597:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3512:113:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9488,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9487,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9489,
+                  "src": "3660:45:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9486,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "3660:26:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3659:47:72"
+            },
+            "scope": 9555,
+            "src": "3486:221:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev After calling, the order can not be filled anymore.\n @param order Order struct containing order specifications.",
+            "id": 9494,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "cancelOrderInternal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9492,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9491,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9494,
+                  "src": "3874:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9490,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "3874:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3873:29:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9493,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3919:0:72"
+            },
+            "scope": 9555,
+            "src": "3845:75:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Updates state with results of a fill order.\n @param order that was filled.\n @param takerAddress Address of taker who filled the order.\n @param orderTakerAssetFilledAmount Amount of order already filled.\n @return fillResults Amounts filled and fees paid by maker and taker.",
+            "id": 9507,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "updateFilledState",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9505,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9496,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4276:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9495,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "4276:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9498,
+                  "name": "takerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4313:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9497,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4313:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9500,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4343:17:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9499,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4343:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9502,
+                  "name": "orderTakerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4370:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9501,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4370:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9504,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9507,
+                  "src": "4415:45:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9503,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "4415:26:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4266:200:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9506,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4483:0:72"
+            },
+            "scope": 9555,
+            "src": "4240:244:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Updates state with results of cancelling an order.\n      State is only updated if the order is currently fillable.\n      Otherwise, updating state would have no effect.\n @param order that was cancelled.\n @param orderHash Hash of order that was cancelled.",
+            "id": 9514,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "updateCancelledState",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9512,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9509,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9514,
+                  "src": "4825:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9508,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "4825:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9511,
+                  "name": "orderHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9514,
+                  "src": "4862:17:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9510,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4862:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4815:70:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9513,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4902:0:72"
+            },
+            "scope": 9555,
+            "src": "4786:117:72",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Validates context for fillOrder. Succeeds or throws.\n @param order to be filled.\n @param orderInfo OrderStatus, orderHash, and amount already filled of order.\n @param takerAddress Address of order taker.\n @param signature Proof that the orders was created by its maker.",
+            "id": 9525,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertFillableOrder",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9523,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9516,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5262:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9515,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "5262:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9518,
+                  "name": "orderInfo",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5299:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                    "typeString": "struct LibOrder.OrderInfo"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9517,
+                    "name": "LibOrder.OrderInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4744,
+                    "src": "5299:18:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                      "typeString": "struct LibOrder.OrderInfo"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9520,
+                  "name": "takerAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5344:20:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9519,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5344:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9522,
+                  "name": "signature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9525,
+                  "src": "5374:22:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9521,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5374:5:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5252:150:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9524,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "5432:0:72"
+            },
+            "scope": 9555,
+            "src": "5224:209:72",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Validates context for fillOrder. Succeeds or throws.\n @param order to be filled.\n @param orderInfo Status, orderHash, and amount already filled of order.\n @param takerAssetFillAmount Desired amount of order to fill by taker.\n @param takerAssetFilledAmount Amount of takerAsset that will be filled.\n @param makerAssetFilledAmount Amount of makerAsset that will be transfered.",
+            "id": 9538,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertValidFill",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9536,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9527,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "5900:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9526,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "5900:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9529,
+                  "name": "orderInfo",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "5937:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                    "typeString": "struct LibOrder.OrderInfo"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9528,
+                    "name": "LibOrder.OrderInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4744,
+                    "src": "5937:18:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                      "typeString": "struct LibOrder.OrderInfo"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9531,
+                  "name": "takerAssetFillAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "5982:28:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9530,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "5982:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9533,
+                  "name": "takerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "6020:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9532,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6020:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9535,
+                  "name": "makerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9538,
+                  "src": "6060:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9534,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6060:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5890:206:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9537,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6126:0:72"
+            },
+            "scope": 9555,
+            "src": "5866:261:72",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Validates context for cancelOrder. Succeeds or throws.\n @param order to be cancelled.\n @param orderInfo OrderStatus, orderHash, and amount already filled of order.",
+            "id": 9545,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "assertValidCancel",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9543,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9540,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9545,
+                  "src": "6360:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9539,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "6360:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9542,
+                  "name": "orderInfo",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9545,
+                  "src": "6397:35:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                    "typeString": "struct LibOrder.OrderInfo"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9541,
+                    "name": "LibOrder.OrderInfo",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4744,
+                    "src": "6397:18:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                      "typeString": "struct LibOrder.OrderInfo"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6350:88:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9544,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "6468:0:72"
+            },
+            "scope": 9555,
+            "src": "6324:145:72",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": "@dev Calculates amounts filled and fees paid by maker and taker.\n @param order to be filled.\n @param takerAssetFilledAmount Amount of takerAsset that will be filled.\n @return fillResults Amounts filled and fees paid by maker and taker.",
+            "id": 9554,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "calculateFillResults",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9550,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9547,
+                  "name": "order",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9554,
+                  "src": "6779:27:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9546,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "6779:14:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9549,
+                  "name": "takerAssetFilledAmount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9554,
+                  "src": "6816:30:72",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9548,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "6816:7:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6769:83:72"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 9553,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9552,
+                  "name": "fillResults",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9554,
+                  "src": "6900:45:72",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                    "typeString": "struct LibFillResults.FillResults"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 9551,
+                    "name": "LibFillResults.FillResults",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4343,
+                    "src": "6900:26:72",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_storage_ptr",
+                      "typeString": "struct LibFillResults.FillResults"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "6899:47:72"
+            },
+            "scope": 9555,
+            "src": "6740:207:72",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 9556,
+        "src": "846:6104:72"
+      }
+    ],
+    "src": "580:6371:72"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:10.982Z",
+  "devdoc": {
+    "methods": {
+      "cancelOrder((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes))": {
+        "details": "After calling, the order can not be filled anymore.",
+        "params": {
+          "order": "Order struct containing order specifications."
+        }
+      },
+      "cancelOrdersUpTo(uint256)": {
+        "details": "Cancels all orders created by makerAddress with a salt less than or equal to the targetOrderEpoch      and senderAddress equal to msg.sender (or null address if msg.sender == makerAddress).",
+        "params": {
+          "targetOrderEpoch": "Orders created with a salt less or equal to this value will be cancelled."
+        }
+      },
+      "fillOrder((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),uint256,bytes)": {
+        "details": "Fills the input order.",
+        "params": {
+          "order": "Order struct containing order specifications.",
+          "signature": "Proof that order has been created by maker.",
+          "takerAssetFillAmount": "Desired amount of takerAsset to sell."
+        },
+        "return": "Amounts filled and fees paid by maker and taker."
+      },
+      "getOrderInfo((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes))": {
+        "details": "Gets information about an order: status, hash, and amount filled.",
+        "params": {
+          "order": "Order to gather information on."
+        },
+        "return": "OrderInfo Information about the order and its state.                   See LibOrder.OrderInfo for a complete description."
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -1,0 +1,2590 @@
+{
+  "contractName": "MixinMatchOrders",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "leftOrder",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "makerAddress",
+              "type": "address"
+            },
+            {
+              "name": "takerAddress",
+              "type": "address"
+            },
+            {
+              "name": "feeRecipientAddress",
+              "type": "address"
+            },
+            {
+              "name": "senderAddress",
+              "type": "address"
+            },
+            {
+              "name": "makerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "takerAssetAmount",
+              "type": "uint256"
+            },
+            {
+              "name": "makerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "takerFee",
+              "type": "uint256"
+            },
+            {
+              "name": "expirationTimeSeconds",
+              "type": "uint256"
+            },
+            {
+              "name": "salt",
+              "type": "uint256"
+            },
+            {
+              "name": "makerAssetData",
+              "type": "bytes"
+            },
+            {
+              "name": "takerAssetData",
+              "type": "bytes"
+            }
+          ],
+          "name": "rightOrder",
+          "type": "tuple"
+        },
+        {
+          "name": "leftSignature",
+          "type": "bytes"
+        },
+        {
+          "name": "rightSignature",
+          "type": "bytes"
+        }
+      ],
+      "name": "matchOrders",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity ^0.4.24;\npragma experimental ABIEncoderV2;\n\nimport \"./libs/LibConstants.sol\";\nimport \"../../../libs/contracts/libs/LibOrder.sol\";\nimport \"../../../libs/contracts/libs/LibFillResults.sol\";\nimport \"../../../utils/contracts/utils/Ownable/Ownable.sol\";\n\n\ncontract MixinMatchOrders is\n    Ownable,\n    LibConstants\n{\n    /// @dev Match two complementary orders that have a profitable spread.\n    ///      Each order is filled at their respective price point. However, the calculations are\n    ///      carried out as though the orders are both being filled at the right order's price point.\n    ///      The profit made by the left order is then used to fill the right order as much as possible.\n    ///      This results in a spread being taken in terms of both assets. The spread is held within this contract.\n    /// @param leftOrder First order to match.\n    /// @param rightOrder Second order to match.\n    /// @param leftSignature Proof that order was created by the left maker.\n    /// @param rightSignature Proof that order was created by the right maker.\n    function matchOrders(\n        LibOrder.Order memory leftOrder,\n        LibOrder.Order memory rightOrder,\n        bytes memory leftSignature,\n        bytes memory rightSignature\n    )\n        public\n        onlyOwner\n    {\n        // Match orders, maximally filling `leftOrder`\n        LibFillResults.MatchedFillResults memory matchedFillResults = EXCHANGE.matchOrders(\n            leftOrder,\n            rightOrder,\n            leftSignature,\n            rightSignature\n        );\n\n        uint256 leftMakerAssetSpreadAmount = matchedFillResults.leftMakerAssetSpreadAmount;\n        uint256 rightOrderTakerAssetAmount = rightOrder.takerAssetAmount;\n\n        // Do not attempt to call `fillOrder` if no spread was taken or `rightOrder` has been completely filled\n        if (leftMakerAssetSpreadAmount == 0 || matchedFillResults.right.takerAssetFilledAmount == rightOrderTakerAssetAmount) {\n            return;\n        }\n\n        // The `assetData` fields of the `rightOrder` could have been null for the `matchOrders` call. We reassign them before calling `fillOrder`.\n        rightOrder.makerAssetData = leftOrder.takerAssetData;\n        rightOrder.takerAssetData = leftOrder.makerAssetData;\n\n        // Query `rightOrder` info to check if it has been completely filled\n        // We need to make this check in case the `rightOrder` was partially filled before the `matchOrders` call\n        LibOrder.OrderInfo memory orderInfo = EXCHANGE.getOrderInfo(rightOrder);\n\n        // Do not attempt to call `fillOrder` if order has been completely filled\n        if (orderInfo.orderTakerAssetFilledAmount == rightOrderTakerAssetAmount) {\n            return;\n        }\n\n        // We do not need to pass in a signature since it was already validated in the `matchOrders` call\n        EXCHANGE.fillOrder(\n            rightOrder,\n            leftMakerAssetSpreadAmount,\n            \"\"\n        );\n    }\n}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/MixinMatchOrders.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/MixinMatchOrders.sol",
+    "exportedSymbols": {
+      "MixinMatchOrders": [
+        2715
+      ]
+    },
+    "id": 2716,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2619,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:24"
+      },
+      {
+        "id": 2620,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:24"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/libs/LibConstants.sol",
+        "file": "./libs/LibConstants.sol",
+        "id": 2621,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 2847,
+        "src": "640:33:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../libs/contracts/libs/LibOrder.sol",
+        "id": 2622,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 4793,
+        "src": "674:51:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibFillResults.sol",
+        "file": "../../../libs/contracts/libs/LibFillResults.sol",
+        "id": 2623,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 4404,
+        "src": "726:57:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/utils/Ownable/Ownable.sol",
+        "file": "../../../utils/contracts/utils/Ownable/Ownable.sol",
+        "id": 2624,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 13524,
+        "src": "784:60:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2625,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13523,
+              "src": "880:7:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$13523",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 2626,
+            "nodeType": "InheritanceSpecifier",
+            "src": "880:7:24"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2627,
+              "name": "LibConstants",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2846,
+              "src": "893:12:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_LibConstants_$2846",
+                "typeString": "contract LibConstants"
+              }
+            },
+            "id": 2628,
+            "nodeType": "InheritanceSpecifier",
+            "src": "893:12:24"
+          }
+        ],
+        "contractDependencies": [
+          2846,
+          13475,
+          13523
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2715,
+        "linearizedBaseContracts": [
+          2715,
+          2846,
+          13523,
+          13475
+        ],
+        "name": "MixinMatchOrders",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2713,
+              "nodeType": "Block",
+              "src": "1879:1671:24",
+              "statements": [
+                {
+                  "assignments": [
+                    2644
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2644,
+                      "name": "matchedFillResults",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "1944:59:24",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                        "typeString": "struct LibFillResults.MatchedFillResults"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 2643,
+                        "name": "LibFillResults.MatchedFillResults",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 4350,
+                        "src": "1944:33:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_MatchedFillResults_$4350_storage_ptr",
+                          "typeString": "struct LibFillResults.MatchedFillResults"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2652,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2647,
+                        "name": "leftOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2630,
+                        "src": "2040:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2648,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "2063:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2649,
+                        "name": "leftSignature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2634,
+                        "src": "2087:13:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2650,
+                        "name": "rightSignature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2636,
+                        "src": "2114:14:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        },
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2645,
+                        "name": "EXCHANGE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2797,
+                        "src": "2006:8:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IExchange_$3447",
+                          "typeString": "contract IExchange"
+                        }
+                      },
+                      "id": 2646,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "matchOrders",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3499,
+                      "src": "2006:20:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_struct$_Order_$4737_memory_ptr_$_t_struct$_Order_$4737_memory_ptr_$_t_bytes_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_struct$_MatchedFillResults_$4350_memory_ptr_$",
+                        "typeString": "function (struct LibOrder.Order memory,struct LibOrder.Order memory,bytes memory,bytes memory) external returns (struct LibFillResults.MatchedFillResults memory)"
+                      }
+                    },
+                    "id": 2651,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2006:132:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                      "typeString": "struct LibFillResults.MatchedFillResults memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1944:194:24"
+                },
+                {
+                  "assignments": [
+                    2654
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2654,
+                      "name": "leftMakerAssetSpreadAmount",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "2149:34:24",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 2653,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2149:7:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2657,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 2655,
+                      "name": "matchedFillResults",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2644,
+                      "src": "2186:18:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                        "typeString": "struct LibFillResults.MatchedFillResults memory"
+                      }
+                    },
+                    "id": 2656,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "leftMakerAssetSpreadAmount",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 4349,
+                    "src": "2186:45:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2149:82:24"
+                },
+                {
+                  "assignments": [
+                    2659
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2659,
+                      "name": "rightOrderTakerAssetAmount",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "2241:34:24",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 2658,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2241:7:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2662,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 2660,
+                      "name": "rightOrder",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2632,
+                      "src": "2278:10:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                        "typeString": "struct LibOrder.Order memory"
+                      }
+                    },
+                    "id": 2661,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "takerAssetAmount",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 4724,
+                    "src": "2278:27:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2241:64:24"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 2671,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 2665,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "argumentTypes": null,
+                        "id": 2663,
+                        "name": "leftMakerAssetSpreadAmount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2654,
+                        "src": "2432:26:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "argumentTypes": null,
+                        "hexValue": "30",
+                        "id": 2664,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2462:1:24",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      },
+                      "src": "2432:31:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "||",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 2670,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 2666,
+                            "name": "matchedFillResults",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2644,
+                            "src": "2467:18:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                              "typeString": "struct LibFillResults.MatchedFillResults memory"
+                            }
+                          },
+                          "id": 2667,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "right",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 4347,
+                          "src": "2467:24:24",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_FillResults_$4343_memory",
+                            "typeString": "struct LibFillResults.FillResults memory"
+                          }
+                        },
+                        "id": 2668,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "takerAssetFilledAmount",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 4338,
+                        "src": "2467:47:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "argumentTypes": null,
+                        "id": 2669,
+                        "name": "rightOrderTakerAssetAmount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2659,
+                        "src": "2518:26:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "2467:77:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "2432:112:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 2674,
+                  "nodeType": "IfStatement",
+                  "src": "2428:149:24",
+                  "trueBody": {
+                    "id": 2673,
+                    "nodeType": "Block",
+                    "src": "2546:31:24",
+                    "statements": [
+                      {
+                        "expression": null,
+                        "functionReturnParameters": 2640,
+                        "id": 2672,
+                        "nodeType": "Return",
+                        "src": "2560:7:24"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 2680,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2675,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "2735:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2677,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "makerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4734,
+                      "src": "2735:25:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2678,
+                        "name": "leftOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2630,
+                        "src": "2763:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2679,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "takerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4736,
+                      "src": "2763:24:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "src": "2735:52:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "id": 2681,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2735:52:24"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 2687,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2682,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "2797:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2684,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "takerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4736,
+                      "src": "2797:25:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2685,
+                        "name": "leftOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2630,
+                        "src": "2825:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2686,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "makerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4734,
+                      "src": "2825:24:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "src": "2797:52:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "id": 2688,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2797:52:24"
+                },
+                {
+                  "assignments": [
+                    2692
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2692,
+                      "name": "orderInfo",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "3051:35:24",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                        "typeString": "struct LibOrder.OrderInfo"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 2691,
+                        "name": "LibOrder.OrderInfo",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 4744,
+                        "src": "3051:18:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                          "typeString": "struct LibOrder.OrderInfo"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2697,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2695,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "3111:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2693,
+                        "name": "EXCHANGE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2797,
+                        "src": "3089:8:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IExchange_$3447",
+                          "typeString": "contract IExchange"
+                        }
+                      },
+                      "id": 2694,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getOrderInfo",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3480,
+                      "src": "3089:21:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_struct$_Order_$4737_memory_ptr_$returns$_t_struct$_OrderInfo_$4744_memory_ptr_$",
+                        "typeString": "function (struct LibOrder.Order memory) view external returns (struct LibOrder.OrderInfo memory)"
+                      }
+                    },
+                    "id": 2696,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3089:33:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                      "typeString": "struct LibOrder.OrderInfo memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "3051:71:24"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 2701,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2698,
+                        "name": "orderInfo",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2692,
+                        "src": "3219:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                          "typeString": "struct LibOrder.OrderInfo memory"
+                        }
+                      },
+                      "id": 2699,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "orderTakerAssetFilledAmount",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4743,
+                      "src": "3219:37:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "id": 2700,
+                      "name": "rightOrderTakerAssetAmount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2659,
+                      "src": "3260:26:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "3219:67:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 2704,
+                  "nodeType": "IfStatement",
+                  "src": "3215:104:24",
+                  "trueBody": {
+                    "id": 2703,
+                    "nodeType": "Block",
+                    "src": "3288:31:24",
+                    "statements": [
+                      {
+                        "expression": null,
+                        "functionReturnParameters": 2640,
+                        "id": 2702,
+                        "nodeType": "Return",
+                        "src": "3302:7:24"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2708,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "3467:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2709,
+                        "name": "leftMakerAssetSpreadAmount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2654,
+                        "src": "3491:26:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "",
+                        "id": 2710,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "3531:2:24",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                          "typeString": "literal_string \"\""
+                        },
+                        "value": ""
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                          "typeString": "literal_string \"\""
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2705,
+                        "name": "EXCHANGE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2797,
+                        "src": "3435:8:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IExchange_$3447",
+                          "typeString": "contract IExchange"
+                        }
+                      },
+                      "id": 2707,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "fillOrder",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3468,
+                      "src": "3435:18:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_struct$_Order_$4737_memory_ptr_$_t_uint256_$_t_bytes_memory_ptr_$returns$_t_struct$_FillResults_$4343_memory_ptr_$",
+                        "typeString": "function (struct LibOrder.Order memory,uint256,bytes memory) external returns (struct LibFillResults.FillResults memory)"
+                      }
+                    },
+                    "id": 2711,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3435:108:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                      "typeString": "struct LibFillResults.FillResults memory"
+                    }
+                  },
+                  "id": 2712,
+                  "nodeType": "ExpressionStatement",
+                  "src": "3435:108:24"
+                }
+              ]
+            },
+            "documentation": "@dev Match two complementary orders that have a profitable spread.\n      Each order is filled at their respective price point. However, the calculations are\n      carried out as though the orders are both being filled at the right order's price point.\n      The profit made by the left order is then used to fill the right order as much as possible.\n      This results in a spread being taken in terms of both assets. The spread is held within this contract.\n @param leftOrder First order to match.\n @param rightOrder Second order to match.\n @param leftSignature Proof that order was created by the left maker.\n @param rightSignature Proof that order was created by the right maker.",
+            "id": 2714,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 2639,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 2638,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 13503,
+                  "src": "1865:9:24",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1865:9:24"
+              }
+            ],
+            "name": "matchOrders",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2637,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2630,
+                  "name": "leftOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1689:31:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2629,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1689:14:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2632,
+                  "name": "rightOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1730:32:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2631,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1730:14:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2634,
+                  "name": "leftSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1772:26:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2633,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1772:5:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2636,
+                  "name": "rightSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1808:27:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2635,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1808:5:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1679:162:24"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2640,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1879:0:24"
+            },
+            "scope": 2715,
+            "src": "1659:1891:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2716,
+        "src": "847:2705:24"
+      }
+    ],
+    "src": "580:2973:24"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/MixinMatchOrders.sol",
+    "exportedSymbols": {
+      "MixinMatchOrders": [
+        2715
+      ]
+    },
+    "id": 2716,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2619,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:24:24"
+      },
+      {
+        "id": 2620,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "605:33:24"
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/extensions/contracts/OrderMatcher/libs/LibConstants.sol",
+        "file": "./libs/LibConstants.sol",
+        "id": 2621,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 2847,
+        "src": "640:33:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibOrder.sol",
+        "file": "../../../libs/contracts/libs/LibOrder.sol",
+        "id": 2622,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 4793,
+        "src": "674:51:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/libs/contracts/libs/LibFillResults.sol",
+        "file": "../../../libs/contracts/libs/LibFillResults.sol",
+        "id": 2623,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 4404,
+        "src": "726:57:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/utils/contracts/utils/Ownable/Ownable.sol",
+        "file": "../../../utils/contracts/utils/Ownable/Ownable.sol",
+        "id": 2624,
+        "nodeType": "ImportDirective",
+        "scope": 2716,
+        "sourceUnit": 13524,
+        "src": "784:60:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2625,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13523,
+              "src": "880:7:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$13523",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 2626,
+            "nodeType": "InheritanceSpecifier",
+            "src": "880:7:24"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 2627,
+              "name": "LibConstants",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2846,
+              "src": "893:12:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_LibConstants_$2846",
+                "typeString": "contract LibConstants"
+              }
+            },
+            "id": 2628,
+            "nodeType": "InheritanceSpecifier",
+            "src": "893:12:24"
+          }
+        ],
+        "contractDependencies": [
+          2846,
+          13475,
+          13523
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 2715,
+        "linearizedBaseContracts": [
+          2715,
+          2846,
+          13523,
+          13475
+        ],
+        "name": "MixinMatchOrders",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 2713,
+              "nodeType": "Block",
+              "src": "1879:1671:24",
+              "statements": [
+                {
+                  "assignments": [
+                    2644
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2644,
+                      "name": "matchedFillResults",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "1944:59:24",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                        "typeString": "struct LibFillResults.MatchedFillResults"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 2643,
+                        "name": "LibFillResults.MatchedFillResults",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 4350,
+                        "src": "1944:33:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_MatchedFillResults_$4350_storage_ptr",
+                          "typeString": "struct LibFillResults.MatchedFillResults"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2652,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2647,
+                        "name": "leftOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2630,
+                        "src": "2040:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2648,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "2063:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2649,
+                        "name": "leftSignature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2634,
+                        "src": "2087:13:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2650,
+                        "name": "rightSignature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2636,
+                        "src": "2114:14:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        },
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2645,
+                        "name": "EXCHANGE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2797,
+                        "src": "2006:8:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IExchange_$3447",
+                          "typeString": "contract IExchange"
+                        }
+                      },
+                      "id": 2646,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "matchOrders",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3499,
+                      "src": "2006:20:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_struct$_Order_$4737_memory_ptr_$_t_struct$_Order_$4737_memory_ptr_$_t_bytes_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_struct$_MatchedFillResults_$4350_memory_ptr_$",
+                        "typeString": "function (struct LibOrder.Order memory,struct LibOrder.Order memory,bytes memory,bytes memory) external returns (struct LibFillResults.MatchedFillResults memory)"
+                      }
+                    },
+                    "id": 2651,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2006:132:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                      "typeString": "struct LibFillResults.MatchedFillResults memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1944:194:24"
+                },
+                {
+                  "assignments": [
+                    2654
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2654,
+                      "name": "leftMakerAssetSpreadAmount",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "2149:34:24",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 2653,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2149:7:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2657,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 2655,
+                      "name": "matchedFillResults",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2644,
+                      "src": "2186:18:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                        "typeString": "struct LibFillResults.MatchedFillResults memory"
+                      }
+                    },
+                    "id": 2656,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "leftMakerAssetSpreadAmount",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 4349,
+                    "src": "2186:45:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2149:82:24"
+                },
+                {
+                  "assignments": [
+                    2659
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2659,
+                      "name": "rightOrderTakerAssetAmount",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "2241:34:24",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 2658,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "2241:7:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2662,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 2660,
+                      "name": "rightOrder",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2632,
+                      "src": "2278:10:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                        "typeString": "struct LibOrder.Order memory"
+                      }
+                    },
+                    "id": 2661,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "takerAssetAmount",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 4724,
+                    "src": "2278:27:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2241:64:24"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 2671,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 2665,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "argumentTypes": null,
+                        "id": 2663,
+                        "name": "leftMakerAssetSpreadAmount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2654,
+                        "src": "2432:26:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "argumentTypes": null,
+                        "hexValue": "30",
+                        "id": 2664,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2462:1:24",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      },
+                      "src": "2432:31:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "||",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 2670,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 2666,
+                            "name": "matchedFillResults",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2644,
+                            "src": "2467:18:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_MatchedFillResults_$4350_memory_ptr",
+                              "typeString": "struct LibFillResults.MatchedFillResults memory"
+                            }
+                          },
+                          "id": 2667,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "right",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 4347,
+                          "src": "2467:24:24",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_FillResults_$4343_memory",
+                            "typeString": "struct LibFillResults.FillResults memory"
+                          }
+                        },
+                        "id": 2668,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "takerAssetFilledAmount",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 4338,
+                        "src": "2467:47:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "argumentTypes": null,
+                        "id": 2669,
+                        "name": "rightOrderTakerAssetAmount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2659,
+                        "src": "2518:26:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "2467:77:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "2432:112:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 2674,
+                  "nodeType": "IfStatement",
+                  "src": "2428:149:24",
+                  "trueBody": {
+                    "id": 2673,
+                    "nodeType": "Block",
+                    "src": "2546:31:24",
+                    "statements": [
+                      {
+                        "expression": null,
+                        "functionReturnParameters": 2640,
+                        "id": 2672,
+                        "nodeType": "Return",
+                        "src": "2560:7:24"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 2680,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2675,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "2735:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2677,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "makerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4734,
+                      "src": "2735:25:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2678,
+                        "name": "leftOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2630,
+                        "src": "2763:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2679,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "takerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4736,
+                      "src": "2763:24:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "src": "2735:52:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "id": 2681,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2735:52:24"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 2687,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2682,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "2797:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2684,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "takerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4736,
+                      "src": "2797:25:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2685,
+                        "name": "leftOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2630,
+                        "src": "2825:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      "id": 2686,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "makerAssetData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4734,
+                      "src": "2825:24:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    "src": "2797:52:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory",
+                      "typeString": "bytes memory"
+                    }
+                  },
+                  "id": 2688,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2797:52:24"
+                },
+                {
+                  "assignments": [
+                    2692
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 2692,
+                      "name": "orderInfo",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 2714,
+                      "src": "3051:35:24",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                        "typeString": "struct LibOrder.OrderInfo"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 2691,
+                        "name": "LibOrder.OrderInfo",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 4744,
+                        "src": "3051:18:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OrderInfo_$4744_storage_ptr",
+                          "typeString": "struct LibOrder.OrderInfo"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 2697,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2695,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "3111:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2693,
+                        "name": "EXCHANGE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2797,
+                        "src": "3089:8:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IExchange_$3447",
+                          "typeString": "contract IExchange"
+                        }
+                      },
+                      "id": 2694,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getOrderInfo",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3480,
+                      "src": "3089:21:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_struct$_Order_$4737_memory_ptr_$returns$_t_struct$_OrderInfo_$4744_memory_ptr_$",
+                        "typeString": "function (struct LibOrder.Order memory) view external returns (struct LibOrder.OrderInfo memory)"
+                      }
+                    },
+                    "id": 2696,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3089:33:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                      "typeString": "struct LibOrder.OrderInfo memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "3051:71:24"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 2701,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2698,
+                        "name": "orderInfo",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2692,
+                        "src": "3219:9:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OrderInfo_$4744_memory_ptr",
+                          "typeString": "struct LibOrder.OrderInfo memory"
+                        }
+                      },
+                      "id": 2699,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "orderTakerAssetFilledAmount",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4743,
+                      "src": "3219:37:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "id": 2700,
+                      "name": "rightOrderTakerAssetAmount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 2659,
+                      "src": "3260:26:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "3219:67:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": null,
+                  "id": 2704,
+                  "nodeType": "IfStatement",
+                  "src": "3215:104:24",
+                  "trueBody": {
+                    "id": 2703,
+                    "nodeType": "Block",
+                    "src": "3288:31:24",
+                    "statements": [
+                      {
+                        "expression": null,
+                        "functionReturnParameters": 2640,
+                        "id": 2702,
+                        "nodeType": "Return",
+                        "src": "3302:7:24"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 2708,
+                        "name": "rightOrder",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2632,
+                        "src": "3467:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 2709,
+                        "name": "leftMakerAssetSpreadAmount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2654,
+                        "src": "3491:26:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "",
+                        "id": 2710,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "3531:2:24",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                          "typeString": "literal_string \"\""
+                        },
+                        "value": ""
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                          "typeString": "struct LibOrder.Order memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                          "typeString": "literal_string \"\""
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 2705,
+                        "name": "EXCHANGE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2797,
+                        "src": "3435:8:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IExchange_$3447",
+                          "typeString": "contract IExchange"
+                        }
+                      },
+                      "id": 2707,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "fillOrder",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3468,
+                      "src": "3435:18:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_struct$_Order_$4737_memory_ptr_$_t_uint256_$_t_bytes_memory_ptr_$returns$_t_struct$_FillResults_$4343_memory_ptr_$",
+                        "typeString": "function (struct LibOrder.Order memory,uint256,bytes memory) external returns (struct LibFillResults.FillResults memory)"
+                      }
+                    },
+                    "id": 2711,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3435:108:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_FillResults_$4343_memory_ptr",
+                      "typeString": "struct LibFillResults.FillResults memory"
+                    }
+                  },
+                  "id": 2712,
+                  "nodeType": "ExpressionStatement",
+                  "src": "3435:108:24"
+                }
+              ]
+            },
+            "documentation": "@dev Match two complementary orders that have a profitable spread.\n      Each order is filled at their respective price point. However, the calculations are\n      carried out as though the orders are both being filled at the right order's price point.\n      The profit made by the left order is then used to fill the right order as much as possible.\n      This results in a spread being taken in terms of both assets. The spread is held within this contract.\n @param leftOrder First order to match.\n @param rightOrder Second order to match.\n @param leftSignature Proof that order was created by the left maker.\n @param rightSignature Proof that order was created by the right maker.",
+            "id": 2714,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 2639,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 2638,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 13503,
+                  "src": "1865:9:24",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1865:9:24"
+              }
+            ],
+            "name": "matchOrders",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2637,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2630,
+                  "name": "leftOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1689:31:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2629,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1689:14:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2632,
+                  "name": "rightOrder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1730:32:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Order_$4737_memory_ptr",
+                    "typeString": "struct LibOrder.Order"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 2631,
+                    "name": "LibOrder.Order",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4737,
+                    "src": "1730:14:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Order_$4737_storage_ptr",
+                      "typeString": "struct LibOrder.Order"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2634,
+                  "name": "leftSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1772:26:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2633,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1772:5:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2636,
+                  "name": "rightSignature",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2714,
+                  "src": "1808:27:24",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 2635,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1808:5:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1679:162:24"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 2640,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1879:0:24"
+            },
+            "scope": 2715,
+            "src": "1659:1891:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 2716,
+        "src": "847:2705:24"
+      }
+    ],
+    "src": "580:2973:24"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:48.719Z",
+  "devdoc": {
+    "methods": {
+      "matchOrders((address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),(address,address,address,address,uint256,uint256,uint256,uint256,uint256,uint256,bytes,bytes),bytes,bytes)": {
+        "details": "Match two complementary orders that have a profitable spread.      Each order is filled at their respective price point. However, the calculations are      carried out as though the orders are both being filled at the right order's price point.      The profit made by the left order is then used to fill the right order as much as possible.      This results in a spread being taken in terms of both assets. The spread is held within this contract.",
+        "params": {
+          "leftOrder": "First order to match.",
+          "leftSignature": "Proof that order was created by the left maker.",
+          "rightOrder": "Second order to match.",
+          "rightSignature": "Proof that order was created by the right maker."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

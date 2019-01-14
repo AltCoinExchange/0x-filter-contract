@@ -1,0 +1,101 @@
+{
+  "contractName": "TestRejectEther",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820e1b2da01f45b03a3199b1cd9f9bcffd715669d58f7c91843198633982134766f0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820e1b2da01f45b03a3199b1cd9f9bcffd715669d58f7c91843198633982134766f0029",
+  "sourceMap": "641:27:57:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;641:27:57;;;;;;;",
+  "deployedSourceMap": "641:27:57:-;;;;;",
+  "source": "/*\n\n  Copyright 2018 ZeroEx Intl.\n\n  Licensed under the Apache License, Version 2.0 (the \"License\");\n  you may not use this file except in compliance with the License.\n  You may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS,\n  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  See the License for the specific language governing permissions and\n  limitations under the License.\n\n*/\n\npragma solidity 0.4.24;\n\n\n// solhint-disable no-empty-blocks\ncontract TestRejectEther {}\n",
+  "sourcePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/multisig/contracts/test/TestRejectEther/TestRejectEther.sol",
+  "ast": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/multisig/contracts/test/TestRejectEther/TestRejectEther.sol",
+    "exportedSymbols": {
+      "TestRejectEther": [
+        6198
+      ]
+    },
+    "id": 6199,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6197,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:23:57"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6198,
+        "linearizedBaseContracts": [
+          6198
+        ],
+        "name": "TestRejectEther",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 6199,
+        "src": "641:27:57"
+      }
+    ],
+    "src": "580:89:57"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/lawrenceballou/Desktop/BlockNerds/Clients/AltcoinIo/filter-contract/contracts/multisig/contracts/test/TestRejectEther/TestRejectEther.sol",
+    "exportedSymbols": {
+      "TestRejectEther": [
+        6198
+      ]
+    },
+    "id": 6199,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6197,
+        "literals": [
+          "solidity",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "580:23:57"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6198,
+        "linearizedBaseContracts": [
+          6198
+        ],
+        "name": "TestRejectEther",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 6199,
+        "src": "641:27:57"
+      }
+    ],
+    "src": "580:89:57"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2018-12-28T17:39:10.969Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
